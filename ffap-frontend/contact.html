@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — F.F.A.P.</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="logo">
+      <img class="logo-mark" src="assets/images/logo-ffap.png" alt="Logo F.F.A.P." />
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="federation.html">La Federation</a></li>
+        <li><a href="artistes.html">Artistes</a></li>
+        <li><a href="actualites.html">Actualites &amp; Evenements</a></li>
+        <li><a href="associations.html">Associations</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://www.helloasso.com/associations/federation-francaise-des-arts-plastiques-f-f-a-p/adhesions/adhesion-f-f-a-p-2026-2027"
+         target="_blank" rel="noopener noreferrer" class="btn btn-cta-externe">
+        Adherer ↗
+      </a>
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Contact</span>
+    <h1>Une question ? Ecrivez-nous</h1>
+  </div>
+</section>
+
+<section>
+  <div class="container" style="max-width:560px;">
+    <p class="texte-secondaire" style="margin-bottom:24px;">ffap.83@gmail.com</p>
+
+    <form id="form-contact" novalidate>
+      <div class="form-champ">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" name="nom" required />
+      </div>
+      <div class="form-champ">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="form-champ">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+
+      <p class="form-erreur" id="contact-erreur" style="display:none;"></p>
+      <p class="form-succes" id="contact-succes" style="display:none;"></p>
+
+      <button type="submit" class="btn btn-primaire" id="contact-submit">Envoyer</button>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="js/script.js"></script>
+<script src="js/footer.js"></script>
+</body>
+</html>

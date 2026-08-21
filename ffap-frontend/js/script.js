@@ -1,0 +1,404 @@
+// Comportement du menu mobile : affiche/masque les liens de navigation
+// Objectif : sur petit ecran, la nav est cachee par defaut (voir CSS @media),
+// ce bouton permet de l'afficher/masquer au clic.
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+
+  if (!toggle || !links) return;
+
+  toggle.addEventListener('click', () => {
+    const estOuvert = links.classList.toggle('nav-links-open');
+    toggle.setAttribute('aria-expanded', String(estOuvert));
+  });
+});
+
+// Newsletter : pas encore de vrai service d'envoi branche (hors perimetre actuel du projet).
+// On bloque juste la soumission et on informe le visiteur, en attendant une decision
+// sur l'outil a utiliser (ex. Brevo, Mailchimp) pour la collecte reelle des emails.
+document.addEventListener('DOMContentLoaded', () => {
+  const formNewsletter = document.getElementById('form-newsletter');
+  const note = document.getElementById('newsletter-note');
+  if (!formNewsletter) return;
+
+  formNewsletter.addEventListener('submit', (event) => {
+    event.preventDefault();
+    note.textContent = 'Fonctionnalite en cours de mise en place, merci de votre patience.';
+  });
+});
+
+const API_BASE_URL = 'http://localhost:3000';
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Renvoie les initiales d'un nom (ex. "Martine de Santis" -> "MD"),
+// utilisees comme visuel de remplacement quand aucune photo n'est renseignee.
+function initiales(nom) {
+  return nom
+    .split(' ')
+    .filter(Boolean)
+    .map((mot) => mot[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+}
+
+// ===== Liste des artistes (page artistes.html) — GET /api/artistes =====
+document.addEventListener('DOMContentLoaded', async () => {
+  const conteneur = document.getElementById('liste-artistes');
+  if (!conteneur) return;
+
+  try {
+    const reponse = await fetch(`${API_BASE_URL}/api/artistes`);
+    if (!reponse.ok) throw new Error('Erreur API');
+    const artistes = await reponse.json();
+
+    if (artistes.length === 0) {
+      conteneur.innerHTML = '<p class="texte-secondaire">Aucun artiste pour le moment.</p>';
+      return;
+    }
+
+    conteneur.innerHTML = artistes.map((artiste) => `
+      <a class="card" href="artiste-detail.html?id=${artiste.id}">
+        <div class="card-media">
+          ${artiste.photo
+            ? `<img src="${API_BASE_URL}${artiste.photo}" alt="${artiste.nom}" />`
+            : initiales(artiste.nom)}
+        </div>
+        <div class="card-body">
+          <h3>${artiste.nom}</h3>
+          <p class="texte-secondaire">${artiste.discipline || ''}</p>
+        </div>
+      </a>
+    `).join('');
+  } catch (error) {
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les artistes. Le serveur back-end est-il demarre ?</p>';
+  }
+});
+
+// ===== Apercu des artistes sur la homepage (index.html) — GET /api/artistes =====
+document.addEventListener('DOMContentLoaded', async () => {
+  const conteneur = document.getElementById('liste-artistes-accueil');
+  if (!conteneur) return;
+
+  try {
+    const reponse = await fetch(`${API_BASE_URL}/api/artistes`);
+    if (!reponse.ok) throw new Error('Erreur API');
+    const artistes = await reponse.json();
+
+    if (artistes.length === 0) {
+      conteneur.innerHTML = '<p class="texte-secondaire">Aucun artiste pour le moment.</p>';
+      return;
+    }
+
+    conteneur.innerHTML = artistes.slice(0, 3).map((artiste) => `
+      <a class="card" href="artiste-detail.html?id=${artiste.id}">
+        <div class="card-media">
+          ${artiste.photo
+            ? `<img src="${API_BASE_URL}${artiste.photo}" alt="${artiste.nom}" />`
+            : initiales(artiste.nom)}
+        </div>
+        <div class="card-body">
+          <h3>${artiste.nom}</h3>
+          <p class="texte-secondaire">${artiste.discipline || ''}</p>
+        </div>
+      </a>
+    `).join('');
+  } catch (error) {
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les artistes. Le serveur back-end est-il demarre ?</p>';
+  }
+});
+
+// ===== Fiche detail d'un artiste (page artiste-detail.html) — GET /api/artistes/:id =====
+document.addEventListener('DOMContentLoaded', async () => {
+  const conteneur = document.getElementById('fiche-artiste');
+  if (!conteneur) return;
+
+  const parametres = new URLSearchParams(window.location.search);
+  const id = parametres.get('id');
+
+  if (!id) {
+    conteneur.innerHTML = '<p class="texte-secondaire">Artiste introuvable.</p>';
+    return;
+  }
+
+  try {
+    const reponse = await fetch(`${API_BASE_URL}/api/artistes/${id}`);
+    if (!reponse.ok) throw new Error('Erreur API');
+    const artiste = await reponse.json();
+
+    document.title = `${artiste.nom} — F.F.A.P.`;
+
+    conteneur.innerHTML = `
+      <div style="display:flex; align-items:center; gap:20px; margin:24px 0;">
+        <div class="card-media" style="width:96px; height:96px; border-radius:50%; flex-shrink:0;">
+          ${artiste.photo
+            ? `<img src="${API_BASE_URL}${artiste.photo}" alt="${artiste.nom}" style="border-radius:50%;" />`
+            : initiales(artiste.nom)}
+        </div>
+        <div>
+          <h1 style="font-size:30px;">${artiste.nom}</h1>
+          <p class="texte-secondaire">${artiste.discipline || ''}</p>
+        </div>
+      </div>
+      <p>${artiste.bio || ''}</p>
+    `;
+
+    const galerie = document.getElementById('galerie-oeuvres');
+    if (galerie) {
+      if (!artiste.oeuvres || artiste.oeuvres.length === 0) {
+        galerie.innerHTML = '<p class="texte-secondaire" style="text-align:center;">Aucune oeuvre publiee pour le moment.</p>';
+      } else {
+        galerie.innerHTML = artiste.oeuvres.map((oeuvre) => `
+          <div class="card">
+            <div class="card-media">
+              <img src="${API_BASE_URL}${oeuvre.image}" alt="${oeuvre.titre || ''}" />
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+  } catch (error) {
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger cet artiste. Le serveur back-end est-il demarre ?</p>';
+  }
+});
+
+// ===== Actualites & evenements (page actualites.html) — GET /api/actualites =====
+const ETIQUETTES_CATEGORIE = {
+  evenement: 'Evenement',
+  sorties: 'Sorties',
+  exposition: 'Exposition',
+};
+
+async function chargerActualites(categorie) {
+  const conteneur = document.getElementById('liste-actualites');
+  if (!conteneur) return;
+
+  conteneur.innerHTML = '<p class="texte-secondaire">Chargement...</p>';
+
+  try {
+    const url = categorie && categorie !== 'tout'
+      ? `${API_BASE_URL}/api/actualites?categorie=${categorie}`
+      : `${API_BASE_URL}/api/actualites`;
+    const reponse = await fetch(url);
+    if (!reponse.ok) throw new Error('Erreur API');
+    const actualites = await reponse.json();
+
+    if (actualites.length === 0) {
+      conteneur.innerHTML = '<p class="texte-secondaire">Aucun contenu dans cette categorie pour le moment.</p>';
+      return;
+    }
+
+    conteneur.innerHTML = actualites.map((item) => {
+      const date = item.date_evenement
+        ? new Date(item.date_evenement).toLocaleDateString('fr-FR', { timeZone: 'UTC' })
+        : '';
+      return `
+        <a class="card" href="evenement-detail.html?id=${item.id}">
+          <div class="card-media">
+            ${item.image ? `<img src="${API_BASE_URL}${item.image}" alt="${item.titre}" />` : ''}
+          </div>
+          <div class="card-body">
+            <span class="card-tag">${ETIQUETTES_CATEGORIE[item.categorie] || item.categorie}</span>
+            <h3>${item.titre}</h3>
+            <p class="texte-secondaire">${[item.lieu, date].filter(Boolean).join(' — ')}</p>
+          </div>
+        </a>
+      `;
+    }).join('');
+  } catch (error) {
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les actualites. Le serveur back-end est-il demarre ?</p>';
+  }
+}
+
+// ===== Apercu evenements/sorties/expositions sur la homepage (index.html) — GET /api/actualites =====
+document.addEventListener('DOMContentLoaded', async () => {
+  const conteneur = document.getElementById('liste-actualites-accueil');
+  if (!conteneur) return;
+
+  try {
+    const reponse = await fetch(`${API_BASE_URL}/api/actualites`);
+    if (!reponse.ok) throw new Error('Erreur API');
+    const items = (await reponse.json()).filter((item) => ['evenement', 'sorties', 'exposition'].includes(item.categorie));
+
+    if (items.length === 0) {
+      conteneur.innerHTML = '<p class="texte-secondaire">Aucun evenement pour le moment.</p>';
+      return;
+    }
+
+    conteneur.innerHTML = items.slice(0, 3).map((item) => {
+      const date = item.date_evenement
+        ? new Date(item.date_evenement).toLocaleDateString('fr-FR', { timeZone: 'UTC' })
+        : '';
+      return `
+        <a class="card" href="evenement-detail.html?id=${item.id}">
+          <div class="card-media">
+            ${item.image ? `<img src="${API_BASE_URL}${item.image}" alt="${item.titre}" />` : ''}
+          </div>
+          <div class="card-body">
+            <span class="card-tag">${ETIQUETTES_CATEGORIE[item.categorie] || item.categorie}</span>
+            <h3>${item.titre}</h3>
+            <p class="texte-secondaire">${[item.lieu, date].filter(Boolean).join(' — ')}</p>
+          </div>
+        </a>
+      `;
+    }).join('');
+  } catch (error) {
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les evenements. Le serveur back-end est-il demarre ?</p>';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const boutons = document.querySelectorAll('[data-filtre]');
+  if (!boutons.length) return;
+
+  chargerActualites('tout');
+
+  boutons.forEach((bouton) => {
+    bouton.addEventListener('click', () => {
+      boutons.forEach((b) => b.classList.remove('filtre-actif'));
+      bouton.classList.add('filtre-actif');
+      chargerActualites(bouton.dataset.filtre);
+    });
+  });
+});
+
+// ===== Fiche detail d'un evenement/actualite (page evenement-detail.html) — GET /api/actualites/:id =====
+document.addEventListener('DOMContentLoaded', async () => {
+  const conteneur = document.getElementById('fiche-evenement');
+  if (!conteneur) return;
+
+  const parametres = new URLSearchParams(window.location.search);
+  const id = parametres.get('id');
+
+  if (!id) {
+    conteneur.innerHTML = '<p class="texte-secondaire">Contenu introuvable.</p>';
+    return;
+  }
+
+  try {
+    const reponse = await fetch(`${API_BASE_URL}/api/actualites/${id}`);
+    if (!reponse.ok) throw new Error('Erreur API');
+    const item = await reponse.json();
+
+    document.title = `${item.titre} — F.F.A.P.`;
+
+    const date = item.date_evenement
+      ? new Date(item.date_evenement).toLocaleDateString('fr-FR', { timeZone: 'UTC' })
+      : '';
+
+    const paragraphes = (item.contenu || '')
+      .split('\n')
+      .map((ligne) => ligne.trim())
+      .filter(Boolean)
+      .map((ligne) => `<p>${ligne}</p>`)
+      .join('');
+
+    conteneur.innerHTML = `
+      ${item.image ? `<div style="margin:24px 0; border-radius:12px; overflow:hidden;"><img src="${API_BASE_URL}${item.image}" alt="${item.titre}" style="width:246px; height:348px; display:block; object-fit:contain;" /></div>` : ''}
+      <span class="card-tag">${ETIQUETTES_CATEGORIE[item.categorie] || item.categorie}</span>
+      <h1 style="font-size:30px; margin-top:12px;">${item.titre}</h1>
+      <p class="texte-secondaire">${[item.lieu, date].filter(Boolean).join(' — ')}</p>
+      <div style="margin-top:20px; line-height:1.8;">${paragraphes}</div>
+    `;
+  } catch (error) {
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger ce contenu. Le serveur back-end est-il demarre ?</p>';
+  }
+});
+
+// ===== Associations membres (page associations.html) — GET /api/associations =====
+document.addEventListener('DOMContentLoaded', async () => {
+  const conteneur = document.getElementById('liste-associations');
+  if (!conteneur) return;
+
+  try {
+    const reponse = await fetch(`${API_BASE_URL}/api/associations`);
+    if (!reponse.ok) throw new Error('Erreur API');
+    const associations = await reponse.json();
+
+    if (associations.length === 0) {
+      conteneur.innerHTML = '<p class="texte-secondaire">Aucune association pour le moment.</p>';
+      return;
+    }
+
+    conteneur.innerHTML = associations.map((asso) => `
+      <div class="card">
+        <div class="card-media" style="background:#fff;">
+          ${asso.logo
+            ? `<img src="${API_BASE_URL}${asso.logo}" alt="Logo ${asso.nom}" style="width:100%; height:100%; object-fit:contain; padding:16px;" />`
+            : initiales(asso.nom)}
+        </div>
+        <div class="card-body">
+          <h3>${asso.nom}</h3>
+          <p class="texte-secondaire">${asso.description || ''}</p>
+        </div>
+      </div>
+    `).join('');
+  } catch (error) {
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les associations. Le serveur back-end est-il demarre ?</p>';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const formContact = document.getElementById('form-contact');
+  if (!formContact) return;
+
+  const champNom = document.getElementById('nom');
+  const champEmail = document.getElementById('email');
+  const champMessage = document.getElementById('message');
+  const erreur = document.getElementById('contact-erreur');
+  const succes = document.getElementById('contact-succes');
+  const boutonEnvoyer = document.getElementById('contact-submit');
+
+  formContact.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    erreur.style.display = 'none';
+    succes.style.display = 'none';
+
+    const nom = champNom.value.trim();
+    const email = champEmail.value.trim();
+    const message = champMessage.value.trim();
+
+    // Validation cote client, en miroir de la validation cote serveur
+    if (!nom || !email || !message) {
+      erreur.textContent = 'Merci de remplir tous les champs.';
+      erreur.style.display = 'block';
+      return;
+    }
+    if (!EMAIL_REGEX.test(email)) {
+      erreur.textContent = 'Adresse email invalide.';
+      erreur.style.display = 'block';
+      return;
+    }
+
+    boutonEnvoyer.disabled = true;
+    boutonEnvoyer.textContent = 'Envoi en cours...';
+
+    try {
+      const reponse = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nom, email, message }),
+      });
+
+      const donnees = await reponse.json();
+
+      if (!reponse.ok) {
+        erreur.textContent = donnees.error || 'Une erreur est survenue.';
+        erreur.style.display = 'block';
+        return;
+      }
+
+      succes.textContent = 'Votre message a bien ete envoye, merci !';
+      succes.style.display = 'block';
+      formContact.reset();
+    } catch (error) {
+      // Le plus souvent : le serveur back-end n'est pas demarre
+      erreur.textContent = 'Impossible de contacter le serveur. Reessayez plus tard.';
+      erreur.style.display = 'block';
+    } finally {
+      boutonEnvoyer.disabled = false;
+      boutonEnvoyer.textContent = 'Envoyer';
+    }
+  });
+});

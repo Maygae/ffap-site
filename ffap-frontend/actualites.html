@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Actualites &amp; Evenements — F.F.A.P.</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="logo">
+      <img class="logo-mark" src="assets/images/logo-ffap.png" alt="Logo F.F.A.P." />
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="federation.html">La Federation</a></li>
+        <li><a href="artistes.html">Artistes</a></li>
+        <li><a href="actualites.html">Actualites &amp; Evenements</a></li>
+        <li><a href="associations.html">Associations</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://www.helloasso.com/associations/federation-francaise-des-arts-plastiques-f-f-a-p/adhesions/adhesion-f-f-a-p-2026-2027"
+         target="_blank" rel="noopener noreferrer" class="btn btn-cta-externe">
+        Adherer ↗
+      </a>
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">A la une</span>
+    <h1>Actualites &amp; evenements</h1>
+    <p>Salons, sorties culturelles et expositions de la federation.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="hero-actions" style="margin-bottom:32px;">
+      <button class="btn btn-secondaire filtre-actif" data-filtre="tout">Tout</button>
+      <button class="btn btn-secondaire" data-filtre="evenement">Evenement</button>
+      <button class="btn btn-secondaire" data-filtre="sorties">Sorties</button>
+      <button class="btn btn-secondaire" data-filtre="exposition">Exposition</button>
+    </div>
+
+    <div class="grid grid-3" id="liste-actualites">
+      <p class="texte-secondaire">Chargement...</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="js/script.js"></script>
+<script src="js/footer.js"></script>
+</body>
+</html>

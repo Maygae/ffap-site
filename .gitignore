@@ -1,0 +1,15 @@
+# Dependances installees (reinstallees via npm install)
+node_modules/
+
+# Variables d'environnement (contient des identifiants sensibles)
+.env
+
+# Fichiers systeme macOS
+.DS_Store
+
+# Fichiers uploades par les utilisateurs (photos artistes, images actualites...)
+# Ne sont pas versionnes : ils sont propres a chaque environnement (dev/prod)
+ffap-backend/uploads/
+
+# Dossier de travail temporaire utilise pour importer des photos via les scripts
+ffap-backend/photos-a-importer/

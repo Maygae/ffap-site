@@ -1,0 +1,477 @@
+/* ===== Polices locales : Barlow (licence libre OFL) ===== */
+/* Remplace SAO TORPES (fichier non fourni) et Avenir Light (police payante) */
+@font-face {
+  font-family: 'Barlow';
+  src: url('../assets/fonts/Barlow-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Barlow';
+  src: url('../assets/fonts/Barlow-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Barlow';
+  src: url('../assets/fonts/Barlow-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== Variables de la direction artistique (Document 2 + propositions validees) ===== */
+:root {
+  --blanc: #FFFFFF;
+  --bleu-marine: #0F2860;
+  --gris-clair: #C2C2C2;
+  --gris-moyen: #6E6E6E;
+  --noir: #000000;
+  --bleu-accent: #1A6AFF;
+
+  --font-titres: 'Barlow', sans-serif;
+  --font-texte: 'Barlow', sans-serif;
+
+  --rayon: 8px;
+  --ombre: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-texte);
+  font-weight: 300;
+  color: var(--noir);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ===== Hierarchie typographique (Document 2) ===== */
+h1 { font-family: var(--font-titres); font-weight: 900; font-size: 40px; color: var(--bleu-marine); line-height: 1.2; }
+h2 { font-family: var(--font-titres); font-weight: 900; font-size: 30px; color: var(--bleu-marine); line-height: 1.25; }
+h3 { font-family: var(--font-titres); font-weight: 900; font-size: 22px; color: var(--noir); }
+p  { font-size: 18px; color: var(--bleu-marine); }
+.texte-secondaire { font-size: 18px; color: var(--bleu-marine); }
+
+/* ===== Boutons (proposition DA complementaire, Etape 5) ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  border-radius: var(--rayon);
+  font-family: var(--font-texte);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: opacity 0.15s ease;
+}
+.btn:hover { opacity: 0.85; }
+
+.btn-primaire {
+  background: var(--bleu-accent);
+  color: var(--blanc);
+}
+.btn-secondaire {
+  background: transparent;
+  color: var(--bleu-marine);
+  border-color: var(--bleu-marine);
+}
+.btn-cta-externe {
+  background: var(--bleu-marine);
+  color: var(--blanc);
+}
+.filtre-actif {
+  background: var(--bleu-accent);
+  color: var(--blanc);
+  border-color: var(--bleu-accent);
+}
+
+/* ===== En-tete ===== */
+.site-header {
+  border-bottom: 1px solid var(--gris-clair);
+  background: var(--blanc);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nav-wrap {
+  position: relative;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-titres);
+  font-size: 14px;
+  color: var(--bleu-marine);
+}
+.logo-mark { height: 88px; width: auto; }
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--bleu-marine);
+}
+.nav-links a:hover { color: var(--bleu-accent); }
+
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.nav-toggle span {
+  width: 22px;
+  height: 2px;
+  background: var(--bleu-marine);
+}
+
+/* ===== Hero ===== */
+.hero {
+  background: #F7F9FC;
+  padding: 64px 0;
+  text-align: center;
+}
+.eyebrow {
+  display: block;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--bleu-accent);
+  margin-bottom: 10px;
+}
+.hero h1 { margin-bottom: 16px; }
+.hero p { max-width: 520px; margin: 0 auto 24px; }
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ===== Sections ===== */
+section { padding: 56px 0; }
+.section-alt { background: #FAFAFA; }
+.section-head { text-align: center; max-width: 560px; margin: 0 auto 36px; }
+
+/* ===== Grilles et cartes ===== */
+.grid { display: grid; gap: 20px; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+.card {
+  display: block;
+  background: var(--blanc);
+  border: 1px solid var(--gris-clair);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--ombre);
+  transition: box-shadow 0.15s ease;
+}
+a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.card-media {
+  height: 160px;
+  background: #E6F1FB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bleu-marine);
+  font-family: var(--font-titres);
+  font-weight: 900;
+  font-size: 20px;
+}
+.card-media img { width: 100%; height: 100%; object-fit: cover; }
+.card-body { padding: 14px 16px; }
+.card-body h3 { font-size: 16px; margin-bottom: 4px; }
+.card-tag {
+  display: inline-block;
+  background: #E6F1FB;
+  color: var(--bleu-marine);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+/* ===== Deux colonnes (mission) ===== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.value-list { list-style: none; margin-top: 16px; }
+.value-list li {
+  padding-left: 22px;
+  position: relative;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: var(--bleu-marine);
+}
+.value-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bleu-accent);
+}
+
+/* ===== Formulaire (Contact) ===== */
+.form-champ { margin-bottom: 18px; }
+.form-champ label {
+  display: block;
+  font-size: 14px;
+  color: var(--bleu-marine);
+  margin-bottom: 6px;
+}
+.form-champ input,
+.form-champ textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--gris-clair);
+  border-radius: var(--rayon);
+  font-family: var(--font-texte);
+  font-size: 15px;
+}
+.form-champ input:focus,
+.form-champ textarea:focus {
+  outline: none;
+  border-color: var(--bleu-accent);
+}
+.form-erreur { color: #A32D2D; font-size: 13px; margin-top: 4px; }
+.form-succes { color: #3B6D11; font-size: 14px; margin-top: 12px; }
+
+/* ===== Bandeau campagne (type "Preparez votre rentree", inspiration fscf.asso.fr) ===== */
+.campagne {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  background: var(--bleu-marine);
+  border-radius: 16px;
+  padding: 48px;
+  color: var(--blanc);
+}
+.campagne .eyebrow { color: #8DB4F0; }
+.campagne h2 { color: var(--blanc); }
+.campagne p { color: #D8E3F5; font-size: 16px; }
+.campagne img { border-radius: 12px; }
+
+/* ===== Nous rejoindre (deux cartes CTA) ===== */
+.rejoindre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.rejoindre-carte {
+  background: #F7F9FC;
+  border: 1px solid var(--gris-clair);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+}
+.rejoindre-carte h3 { margin-bottom: 10px; }
+.rejoindre-carte p { font-size: 15px; margin-bottom: 20px; }
+
+/* ===== Newsletter ===== */
+.newsletter {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  align-items: center;
+  background: #F7F9FC;
+  border-radius: 16px;
+  padding: 40px;
+}
+.newsletter-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.newsletter-form input {
+  flex: 1;
+  min-width: 220px;
+  padding: 10px 14px;
+  border: 1px solid var(--gris-clair);
+  border-radius: var(--rayon);
+  font-family: var(--font-texte);
+  font-size: 15px;
+}
+.newsletter-form input:focus { outline: none; border-color: var(--bleu-accent); }
+.newsletter-note { font-size: 13px; color: var(--gris-moyen); margin-top: 8px; }
+
+/* ===== Partenaires / associations (bandeau logos) ===== */
+.partenaires-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.partenaires-strip img {
+  height: 64px;
+  width: auto;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: opacity 0.15s ease, filter 0.15s ease;
+}
+.partenaires-strip img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* ===== Pied de page (inspiration fscf.asso.fr) ===== */
+.site-footer {
+  background: var(--blanc);
+  color: var(--bleu-marine);
+  padding: 0 0 24px;
+  margin-top: 40px;
+  border-top: 1px solid var(--gris-clair);
+}
+.site-footer a { color: var(--bleu-marine); opacity: 0.85; }
+.site-footer a:hover { opacity: 1; color: var(--bleu-accent); }
+
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 40px 24px 32px;
+  flex-wrap: wrap;
+}
+.footer-info { text-align: left; max-width: 440px; }
+.footer-logo-badge {
+  height: 88px;
+  width: auto;
+  margin: 0 0 20px;
+  display: block;
+}
+.footer-desc {
+  margin: 0;
+  color: var(--gris-moyen);
+  font-size: 15px;
+  line-height: 1.7;
+}
+.footer-social {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 20px;
+}
+.footer-social a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--bleu-marine);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+}
+.footer-social a:hover { background: var(--bleu-marine); color: var(--blanc); }
+.footer-social svg { width: 18px; height: 18px; fill: currentColor; }
+
+.footer-nav { padding-top: 8px; }
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px 20px;
+  font-size: 14px;
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--gris-clair);
+  padding: 20px 24px;
+  text-align: right;
+}
+.footer-copyright {
+  font-size: 13px;
+  color: var(--gris-moyen);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--blanc);
+    border-top: 1px solid var(--gris-clair);
+    border-bottom: 1px solid var(--gris-clair);
+    padding: 20px 24px;
+  }
+  .nav-links.nav-links-open { display: flex; }
+  .nav-toggle { display: flex; }
+  .two-col { grid-template-columns: 1fr; }
+  .grid-4, .grid-3 { grid-template-columns: 1fr 1fr; }
+  h1 { font-size: 30px; }
+  h2 { font-size: 24px; }
+  .campagne { grid-template-columns: 1fr; padding: 28px; }
+  .rejoindre-grid { grid-template-columns: 1fr; }
+  .newsletter { grid-template-columns: 1fr; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .grid-4, .grid-3 { grid-template-columns: 1fr; }
+  .logo-mark { height: 60px; }
+  .site-footer { padding-bottom: 20px; }
+  .footer-main { padding-top: 32px; text-align: center; }
+  .footer-info { text-align: center; max-width: none; }
+  .footer-social { justify-content: center; }
+  .footer-links { align-items: center; }
+  .footer-bottom { text-align: center; padding: 20px; }
+}
