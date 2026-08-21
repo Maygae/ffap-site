@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       .join('');
 
     conteneur.innerHTML = `
-      ${item.image ? `<div style="margin:24px 0; border-radius:12px; overflow:hidden;"><img src="${API_BASE_URL}${item.image}" alt="${item.titre}" style="width:246px; height:348px; display:block; object-fit:contain;" /></div>` : ''}
+      ${item.image ? `<div style="margin:24px 0; border-radius:12px; overflow:hidden;"><img src="${API_BASE_URL}${item.image}" alt="${item.titre}" style="width:246px; height:auto; display:block;" /></div>` : ''}
       <span class="card-tag">${ETIQUETTES_CATEGORIE[item.categorie] || item.categorie}</span>
       <h1 style="font-size:30px; margin-top:12px;">${item.titre}</h1>
       <p class="texte-secondaire">${[item.lieu, date].filter(Boolean).join(' — ')}</p>
