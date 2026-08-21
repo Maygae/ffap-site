@@ -5,7 +5,7 @@ const STATUTS_VALIDES = ['nouveau', 'traite'];
 
 // POST /api/contact — public, n'importe quel visiteur peut envoyer un message
 async function create(req, res) {
-  const { nom, email, message } = req.body;
+  const { nom, email, telephone, message } = req.body;
 
   if (!nom || !email || !message) {
     return res.status(400).json({ error: 'Nom, email et message sont requis' });
@@ -18,7 +18,7 @@ async function create(req, res) {
   }
 
   try {
-    const id = await messageModel.create({ nom, email, message });
+    const id = await messageModel.create({ nom, email, telephone, message });
     res.status(201).json({ id, message: 'Message envoye avec succes' });
   } catch (error) {
     console.error(error);

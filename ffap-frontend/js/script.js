@@ -306,6 +306,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+// Renvoie un resume court d'un texte (ex. pour l'aperçu carte d'une association),
+// en coupant proprement sur un mot entier et en ajoutant "..." si le texte est tronque.
+function resumer(texte, longueur = 100) {
+  if (!texte) return '';
+  const uneLigne = texte.split('\n').map((l) => l.trim()).filter(Boolean)[0] || '';
+  if (uneLigne.length <= longueur) return uneLigne;
+  return `${uneLigne.slice(0, longueur).trim()}...`;
+}
+
 // ===== Associations membres (page associations.html) — GET /api/associations =====
 document.addEventListener('DOMContentLoaded', async () => {
   const conteneur = document.getElementById('liste-associations');
@@ -322,20 +331,64 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     conteneur.innerHTML = associations.map((asso) => `
-      <div class="card">
-        <div class="card-media" style="background:#fff;">
+      <a class="card" href="association-detail.html?id=${asso.id}">
+        <div class="card-media" style="background:#fff; height:220px;">
           ${asso.logo
-            ? `<img src="${API_BASE_URL}${asso.logo}" alt="Logo ${asso.nom}" style="width:100%; height:100%; object-fit:contain; padding:16px;" />`
+            ? `<img src="${API_BASE_URL}${asso.logo}" alt="Logo ${asso.nom}" style="width:100%; height:100%; object-fit:contain; padding:4px;" />`
             : initiales(asso.nom)}
         </div>
         <div class="card-body">
           <h3>${asso.nom}</h3>
-          <p class="texte-secondaire">${asso.description || ''}</p>
+          <p class="texte-secondaire">${resumer(asso.description)}</p>
         </div>
-      </div>
+      </a>
     `).join('');
   } catch (error) {
     conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les associations. Le serveur back-end est-il demarre ?</p>';
+  }
+});
+
+// ===== Fiche detail d'une association (page association-detail.html) — GET /api/associations/:id =====
+document.addEventListener('DOMContentLoaded', async () => {
+  const conteneur = document.getElementById('fiche-association');
+  if (!conteneur) return;
+
+  const parametres = new URLSearchParams(window.location.search);
+  const id = parametres.get('id');
+
+  if (!id) {
+    conteneur.innerHTML = '<p class="texte-secondaire">Association introuvable.</p>';
+    return;
+  }
+
+  try {
+    const reponse = await fetch(`${API_BASE_URL}/api/associations/${id}`);
+    if (!reponse.ok) throw new Error('Erreur API');
+    const asso = await reponse.json();
+
+    document.title = `${asso.nom} — F.F.A.P.`;
+
+    const paragraphes = (asso.description || 'Aucune description pour le moment.')
+      .split('\n')
+      .map((ligne) => ligne.trim())
+      .filter(Boolean)
+      .map((ligne) => `<p>${ligne}</p>`)
+      .join('');
+
+    conteneur.innerHTML = `
+      <div style="display:flex; align-items:center; gap:24px; margin:24px 0; flex-wrap:wrap;">
+        <div class="card-media" style="width:240px; height:240px; border-radius:50%; flex-shrink:0; background:#fff;">
+          ${asso.logo
+            ? `<img src="${API_BASE_URL}${asso.logo}" alt="Logo ${asso.nom}" style="width:100%; height:100%; object-fit:contain; border-radius:50%; padding:16px;" />`
+            : initiales(asso.nom)}
+        </div>
+        <h1 style="font-size:30px;">${asso.nom}</h1>
+      </div>
+      <div style="line-height:1.8;">${paragraphes}</div>
+      ${asso.lien_externe ? `<a href="${asso.lien_externe}" target="_blank" rel="noopener noreferrer" class="btn btn-secondaire" style="margin-top:12px; display:inline-block;">Voir le site ↗</a>` : ''}
+    `;
+  } catch (error) {
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger cette association. Le serveur back-end est-il demarre ?</p>';
   }
 });
 
@@ -343,9 +396,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const formContact = document.getElementById('form-contact');
   if (!formContact) return;
 
+  const champPrenom = document.getElementById('prenom');
   const champNom = document.getElementById('nom');
   const champEmail = document.getElementById('email');
+  const champTelephone = document.getElementById('telephone');
   const champMessage = document.getElementById('message');
+  const champConsentement = document.getElementById('consentement');
   const erreur = document.getElementById('contact-erreur');
   const succes = document.getElementById('contact-succes');
   const boutonEnvoyer = document.getElementById('contact-submit');
@@ -355,18 +411,26 @@ document.addEventListener('DOMContentLoaded', () => {
     erreur.style.display = 'none';
     succes.style.display = 'none';
 
-    const nom = champNom.value.trim();
+    const prenom = champPrenom.value.trim();
+    const nomFamille = champNom.value.trim();
+    const nom = `${prenom} ${nomFamille}`.trim();
     const email = champEmail.value.trim();
+    const telephone = champTelephone.value.trim();
     const message = champMessage.value.trim();
 
     // Validation cote client, en miroir de la validation cote serveur
-    if (!nom || !email || !message) {
-      erreur.textContent = 'Merci de remplir tous les champs.';
+    if (!prenom || !nomFamille || !email || !message) {
+      erreur.textContent = 'Merci de remplir tous les champs obligatoires.';
       erreur.style.display = 'block';
       return;
     }
     if (!EMAIL_REGEX.test(email)) {
       erreur.textContent = 'Adresse email invalide.';
+      erreur.style.display = 'block';
+      return;
+    }
+    if (!champConsentement.checked) {
+      erreur.textContent = 'Merci d\'accepter l\'utilisation de vos donnees pour continuer.';
       erreur.style.display = 'block';
       return;
     }
@@ -378,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const reponse = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nom, email, message }),
+        body: JSON.stringify({ nom, email, telephone, message }),
       });
 
       const donnees = await reponse.json();

@@ -50,6 +50,7 @@ CREATE TABLE message_contact (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nom VARCHAR(150) NOT NULL,
   email VARCHAR(190) NOT NULL,
+  telephone VARCHAR(30),
   message TEXT NOT NULL,
   statut ENUM('nouveau', 'traite') DEFAULT 'nouveau',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

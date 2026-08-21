@@ -10,10 +10,10 @@ async function findById(id) {
   return rows[0] || null;
 }
 
-async function create({ nom, email, message }) {
+async function create({ nom, email, telephone, message }) {
   const [result] = await db.query(
-    'INSERT INTO message_contact (nom, email, message) VALUES (?, ?, ?)',
-    [nom, email, message]
+    'INSERT INTO message_contact (nom, email, telephone, message) VALUES (?, ?, ?, ?)',
+    [nom, email, telephone || null, message]
   );
   return result.insertId;
 }
