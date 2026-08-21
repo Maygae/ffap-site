@@ -24,10 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <div class="container footer-bottom">
       <ul class="footer-links">
-        <li><a href="federation.html">La federation</a></li>
+        <li><a href="index.html">Accueil</a></li>
         <li><a href="artistes.html">Artistes</a></li>
-        <li><a href="actualites.html">Actualites</a></li>
         <li><a href="associations.html">Associations</a></li>
+        <li><a href="actualites.html">Evenements &amp; Sorties</a></li>
+        <li><a href="federation.html">A propos</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="https://www.helloasso.com/associations/federation-francaise-des-arts-plastiques-f-f-a-p/adhesions/adhesion-f-f-a-p-2026-2027" target="_blank" rel="noopener noreferrer">Adherer</a></li>
       </ul>
