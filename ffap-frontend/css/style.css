@@ -198,14 +198,10 @@ section { padding: 56px 0; }
 
 .actions-grid { row-gap: 40px; }
 .action-item { text-align: center; }
-.action-item svg {
-  width: 56px;
-  height: 56px;
-  fill: none;
-  stroke: var(--bleu-marine);
-  stroke-width: 1.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.action-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
   margin-bottom: 16px;
 }
 .action-item p { font-weight: 600; font-size: 16px; margin: 0 auto; max-width: 220px; }
