@@ -391,10 +391,14 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   grid-template-columns: 200px 1fr;
   gap: 32px;
   align-items: center;
-  background: #F7F9FC;
+  background: var(--bleu-marine);
   border-radius: 16px;
   padding: 40px;
+  color: var(--blanc);
 }
+.newsletter .eyebrow { color: #8DB4F0; }
+.newsletter h2 { color: var(--blanc); }
+.newsletter p { color: #D8E3F5; }
 .newsletter-form {
   display: flex;
   gap: 10px;
@@ -405,13 +409,13 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   flex: 1;
   min-width: 220px;
   padding: 10px 14px;
-  border: 1px solid var(--gris-clair);
+  border: 1px solid transparent;
   border-radius: var(--rayon);
   font-family: var(--font-texte);
   font-size: 15px;
 }
 .newsletter-form input:focus { outline: none; border-color: var(--bleu-accent); }
-.newsletter-note { font-size: 13px; color: var(--gris-moyen); margin-top: 8px; }
+.newsletter-note { font-size: 13px; color: #D8E3F5; margin-top: 8px; }
 
 /* ===== Partenaires / associations (bandeau logos) ===== */
 .partenaires-strip {
