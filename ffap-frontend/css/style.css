@@ -80,11 +80,11 @@ p  { font-size: 18px; color: var(--bleu-marine); }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 22px;
-  border-radius: var(--rayon);
+  padding: 14px 30px;
+  border-radius: 14px;
   font-family: var(--font-texte);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
   border: 1px solid transparent;
   transition: opacity 0.15s ease;
