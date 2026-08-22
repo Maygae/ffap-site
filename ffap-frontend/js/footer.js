@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <div class="footer-bottom">
       <p class="footer-copyright">&copy; 2026 F.F.A.P. fait par Maygae</p>
+      <a href="mentions-legales.html" class="footer-copyright" style="text-decoration:underline;">Mentions legales</a>
     </div>
   `;
 });
