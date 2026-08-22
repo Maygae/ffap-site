@@ -342,6 +342,8 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: center;
+  max-width: 860px;
+  margin: 0 auto;
   padding: 56px 24px;
   color: var(--blanc);
 }
