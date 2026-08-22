@@ -138,6 +138,10 @@ p  { font-size: 18px; color: var(--bleu-marine); }
   color: var(--blanc);
   border-color: var(--bleu-accent);
 }
+/* Meme code couleur que les etiquettes de categorie sur les cartes */
+.filtre-actif[data-filtre="evenement"] { background: var(--petrol); border-color: var(--petrol); }
+.filtre-actif[data-filtre="sorties"]   { background: var(--bleu-transition); border-color: var(--bleu-transition); }
+.filtre-actif[data-filtre="exposition"] { background: #4E5F51; border-color: #4E5F51; }
 
 /* ===== En-tete ===== */
 .site-header {
