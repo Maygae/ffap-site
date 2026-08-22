@@ -496,7 +496,6 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 }
 
 .footer-bottom {
-  border-top: 1px solid var(--gris-clair);
   padding: 20px 24px;
   max-width: 1140px;
   margin: 0 auto;
