@@ -398,13 +398,6 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .partenaires-strip img {
   height: 64px;
   width: auto;
-  filter: grayscale(100%);
-  opacity: 0.7;
-  transition: opacity 0.15s ease, filter 0.15s ease;
-}
-.partenaires-strip img:hover {
-  filter: grayscale(0%);
-  opacity: 1;
 }
 
 /* ===== Pied de page (structure inspiree de celebra) ===== */
