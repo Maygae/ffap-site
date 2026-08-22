@@ -203,8 +203,9 @@ p  { font-size: 18px; color: var(--bleu-marine); }
 .eyebrow {
   display: block;
   font-size: 13px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   color: var(--bleu-accent);
   margin-bottom: 10px;
 }
