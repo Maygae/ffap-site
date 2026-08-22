@@ -30,8 +30,7 @@
   --gris-moyen: #6E6E6E;
   --noir: #000000;
   --bleu-accent: #1A6AFF;
-  --orange-accent: #FF8C42; /* couleur hors DA officielle, ajoutee a la demande du porteur de projet */
-
+  
   --font-titres: 'Barlow', sans-serif;
   --font-texte: 'Barlow', sans-serif;
 
@@ -215,7 +214,7 @@ p  { font-size: 18px; color: var(--bleu-marine); }
 
 /* ===== Sections ===== */
 section { padding: 56px 0; }
-.section-alt { background: #FAFAFA; }
+.section-alt { background: #EEF3FC; }
 .section-head { text-align: center; max-width: 560px; margin: 0 auto 36px; }
 
 /* ===== Grilles et cartes ===== */
