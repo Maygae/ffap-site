@@ -23,15 +23,29 @@
 }
 
 /* ===== Variables de la direction artistique =====
-   Palette personnelle (choix du porteur de projet, hors DA agence) :
-   marine institutionnel + accent emeraude (remplace le bleu #1A6AFF). */
+   Palette personnelle (choix du porteur de projet, hors DA agence),
+   organisee par role plutot que par nom de couleur :
+   - marine       : pilier identitaire (header, footer, titres)
+   - transition   : liens, sous-titres, interface secondaire
+   - terracotta   : boutons d'action / CTA — a utiliser avec parcimonie
+   - petrol       : icones, bannieres d'evenements, accents ponctuels
+   - sauge        : illustrations et accents "nature" (utilisee en teinte
+                    tres claire pour les fonds de section alternes)
+   - gris         : utilitaire pur (bordures, separateurs, fonds neutres) */
 :root {
   --blanc: #FFFFFF;
   --bleu-marine: #0F2860;
   --gris-clair: #C2C2C2;
   --gris-moyen: #6E6E6E;
   --noir: #000000;
-  --bleu-accent: #0F6B4C; /* emeraude — nom de variable conserve pour ne pas casser les references CSS existantes */
+
+  --bleu-transition: #5278B8;
+  --terracotta: #C9654B;
+  --petrol: #2E6E6E;
+  --sauge: #829A86;
+  --sauge-tint: #EEF1EC; /* sauge tres eclaircie, pour les fonds de section */
+
+  --bleu-accent: var(--terracotta); /* nom de variable conserve pour ne pas casser les references CSS existantes ; sert desormais uniquement aux boutons/CTA */
 
   --font-titres: 'Barlow', sans-serif;
   --font-texte: 'Barlow', sans-serif;
@@ -41,10 +55,10 @@
 
   /* Rampe : nuances utilisees sur les blocs a fond marine
      (Coordonnees principales, Saison 2026/2027, Newsletter) */
-  --bleu-50: #EAF4EF;   /* fond alterne clair (.section-alt), teinte verte tres douce */
-  --bleu-200: #7FCBA4;  /* eyebrow / accents clairs sur fond marine (tint emeraude) */
-  --bleu-300: #D8E3F5;  /* texte secondaire neutre sur fond marine */
-  --bleu-500: #0F6B4C;  /* = --bleu-accent (emeraude) */
+  --bleu-50: var(--sauge-tint);      /* fond alterne clair (.section-alt) */
+  --bleu-200: #A9BEE0;               /* eyebrow / accents clairs sur fond marine (tint transition) */
+  --bleu-300: #D8E3F5;                /* texte secondaire neutre sur fond marine */
+  --bleu-500: var(--bleu-transition);
   --bleu-700: #0F2860;  /* = --bleu-marine */
 }
 
@@ -165,7 +179,7 @@ p  { font-size: 18px; color: var(--bleu-marine); }
   letter-spacing: 0.4px;
   color: var(--bleu-marine);
 }
-.nav-links a:hover { color: var(--bleu-accent); }
+.nav-links a:hover { color: var(--bleu-transition); }
 
 .nav-search { display: flex; align-items: center; position: relative; }
 .nav-search-toggle {
@@ -177,7 +191,7 @@ p  { font-size: 18px; color: var(--bleu-marine); }
   align-items: center;
   padding: 4px;
 }
-.nav-search-toggle:hover { color: var(--bleu-accent); }
+.nav-search-toggle:hover { color: var(--bleu-transition); }
 .nav-search-form {
   max-width: 0;
   overflow: hidden;
@@ -192,7 +206,7 @@ p  { font-size: 18px; color: var(--bleu-marine); }
   font-size: 13px;
   color: var(--bleu-marine);
 }
-.nav-search-form input:focus { outline: none; border-color: var(--bleu-accent); }
+.nav-search-form input:focus { outline: none; border-color: var(--bleu-transition); }
 
 .nav-cta { display: flex; align-items: center; gap: 12px; }
 
@@ -222,7 +236,7 @@ p  { font-size: 18px; color: var(--bleu-marine); }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.2px;
-  color: var(--bleu-accent);
+  color: var(--bleu-transition);
   margin-bottom: 10px;
 }
 .hero h1 { margin-bottom: 16px; }
@@ -311,7 +325,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--bleu-accent);
+  background: var(--petrol);
 }
 
 /* ===== Formulaire (Contact) ===== */
@@ -334,7 +348,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .form-champ input:focus,
 .form-champ textarea:focus {
   outline: none;
-  border-color: var(--bleu-accent);
+  border-color: var(--bleu-transition);
 }
 .form-erreur { color: #A32D2D; font-size: 13px; margin-top: 4px; }
 .form-succes { color: #3B6D11; font-size: 14px; margin-top: 12px; }
@@ -372,7 +386,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .coordonnees .coordonnees-bloc { margin-bottom: 20px; }
 .coordonnees img { border-radius: 12px; width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto; }
 .coordonnees .footer-social a { color: var(--blanc); }
-.coordonnees .footer-social a:hover { color: var(--bleu-accent); }
+.coordonnees .footer-social a:hover { color: var(--petrol); }
 
 /* ===== Bandeau campagne (type "Preparez votre rentree", inspiration fscf.asso.fr) ===== */
 .campagne {
@@ -435,7 +449,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   font-family: var(--font-texte);
   font-size: 15px;
 }
-.newsletter-form input:focus { outline: none; border-color: var(--bleu-accent); }
+.newsletter-form input:focus { outline: none; border-color: var(--bleu-transition); }
 .newsletter-note { font-size: 13px; color: var(--bleu-300); margin-top: 8px; }
 
 /* ===== Partenaires / associations (bandeau logos) ===== */
@@ -458,7 +472,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   margin-top: 40px;
 }
 .site-footer a { color: var(--bleu-marine); opacity: 0.85; text-decoration: none; }
-.site-footer a:hover { opacity: 1; color: var(--bleu-accent); }
+.site-footer a:hover { opacity: 1; color: var(--bleu-transition); }
 
 .footer-inner {
   max-width: 1140px;
@@ -488,7 +502,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   margin-top: 20px;
 }
 .footer-social a {
-  color: var(--bleu-accent);
+  color: var(--petrol);
   display: flex;
   align-items: center;
   justify-content: center;
