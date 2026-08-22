@@ -14,6 +14,60 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Barre de recherche du header : au clic sur la loupe, affiche le champ ;
+// a la soumission, cherche le terme parmi artistes / associations / evenements
+// et redirige vers la premiere fiche correspondante.
+document.addEventListener('DOMContentLoaded', () => {
+  const zoneRecherche = document.getElementById('nav-search');
+  const boutonRecherche = document.getElementById('nav-search-toggle');
+  const formRecherche = document.getElementById('form-recherche');
+  const inputRecherche = document.getElementById('input-recherche');
+
+  if (!zoneRecherche || !boutonRecherche || !formRecherche || !inputRecherche) return;
+
+  boutonRecherche.addEventListener('click', () => {
+    const estOuvert = zoneRecherche.classList.toggle('ouvert');
+    if (estOuvert) inputRecherche.focus();
+  });
+
+  formRecherche.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const terme = inputRecherche.value.trim().toLowerCase();
+    if (!terme) return;
+
+    try {
+      const [artistes, associations, evenements] = await Promise.all([
+        fetch(`${API_BASE_URL}/api/artistes`).then((r) => r.json()).catch(() => []),
+        fetch(`${API_BASE_URL}/api/associations`).then((r) => r.json()).catch(() => []),
+        fetch(`${API_BASE_URL}/api/actualites`).then((r) => r.json()).catch(() => []),
+      ]);
+
+      const artisteTrouve = (artistes || []).find((a) => a.nom && a.nom.toLowerCase().includes(terme));
+      if (artisteTrouve) {
+        window.location.href = `artiste-detail.html?id=${artisteTrouve.id}`;
+        return;
+      }
+
+      const associationTrouvee = (associations || []).find((a) => a.nom && a.nom.toLowerCase().includes(terme));
+      if (associationTrouvee) {
+        window.location.href = `association-detail.html?id=${associationTrouvee.id}`;
+        return;
+      }
+
+      const evenementTrouve = (evenements || []).find((e) => e.titre && e.titre.toLowerCase().includes(terme));
+      if (evenementTrouve) {
+        window.location.href = `evenement-detail.html?id=${evenementTrouve.id}`;
+        return;
+      }
+
+      alert('Aucun resultat pour « ' + inputRecherche.value + ' ».');
+    } catch (erreur) {
+      console.error('Erreur recherche :', erreur);
+      alert('La recherche est momentanement indisponible.');
+    }
+  });
+});
+
 // Newsletter : pas encore de vrai service d'envoi branche (hors perimetre actuel du projet).
 // On bloque juste la soumission et on informe le visiteur, en attendant une decision
 // sur l'outil a utiliser (ex. Brevo, Mailchimp) pour la collecte reelle des emails.
