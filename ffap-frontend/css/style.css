@@ -140,8 +140,8 @@ p  { font-size: 18px; color: var(--bleu-marine); }
 }
 /* Meme code couleur que les etiquettes de categorie sur les cartes */
 .filtre-actif[data-filtre="evenement"] { background: var(--petrol); border-color: var(--petrol); }
-.filtre-actif[data-filtre="sorties"]   { background: var(--bleu-transition); border-color: var(--bleu-transition); }
-.filtre-actif[data-filtre="exposition"] { background: #4E5F51; border-color: #4E5F51; }
+.filtre-actif[data-filtre="sorties"]   { background: #4E5F51; border-color: #4E5F51; }
+.filtre-actif[data-filtre="exposition"] { background: var(--bleu-transition); border-color: var(--bleu-transition); }
 
 /* ===== En-tete ===== */
 .site-header {
@@ -305,8 +305,8 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 }
 /* Une couleur par categorie, pour les reperer d'un coup d'oeil */
 .card-tag--evenement { background: rgba(46, 110, 110, 0.12); color: var(--petrol); }
-.card-tag--sorties    { background: rgba(82, 120, 184, 0.12); color: var(--bleu-transition); }
-.card-tag--exposition { background: rgba(130, 154, 134, 0.18); color: #4E5F51; }
+.card-tag--sorties    { background: rgba(130, 154, 134, 0.18); color: #4E5F51; }
+.card-tag--exposition { background: rgba(82, 120, 184, 0.12); color: var(--bleu-transition); }
 
 /* ===== Deux colonnes (mission) ===== */
 .two-col {
