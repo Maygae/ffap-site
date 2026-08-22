@@ -440,7 +440,6 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   background: var(--blanc);
   color: var(--bleu-marine);
   margin-top: 40px;
-  border-top: 1px solid var(--gris-clair);
 }
 .site-footer a { color: var(--bleu-marine); opacity: 0.85; text-decoration: none; }
 .site-footer a:hover { opacity: 1; color: var(--bleu-accent); }
@@ -496,6 +495,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 }
 
 .footer-bottom {
+  border-top: 1px solid var(--gris-clair);
   padding: 20px 24px;
   max-width: 1140px;
   margin: 0 auto;
