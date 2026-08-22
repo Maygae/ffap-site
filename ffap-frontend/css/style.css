@@ -353,7 +353,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .coordonnees p { color: #D8E3F5; font-size: 16px; margin-bottom: 4px; }
 .coordonnees a { color: var(--blanc); }
 .coordonnees .coordonnees-bloc { margin-bottom: 20px; }
-.coordonnees img { border-radius: 12px; width: 100%; height: auto; }
+.coordonnees img { border-radius: 12px; width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto; }
 .coordonnees .footer-social a { color: var(--blanc); }
 .coordonnees .footer-social a:hover { color: var(--bleu-accent); }
 
