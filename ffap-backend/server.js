@@ -9,6 +9,7 @@ const oeuvreRoutes = require('./src/routes/oeuvre.routes');
 const evenementRoutes = require('./src/routes/evenement.routes');
 const associationRoutes = require('./src/routes/association.routes');
 const messageRoutes = require('./src/routes/message.routes');
+const imageRoutes = require('./src/routes/image.routes');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/api/oeuvres', oeuvreRoutes);
 app.use('/api/actualites', evenementRoutes);
 app.use('/api/associations', associationRoutes);
 app.use('/api/contact', messageRoutes);
+app.use('/api/images', imageRoutes);
 
 // Route de test : verifie que le serveur tourne
 app.get('/', (req, res) => {

@@ -13,4 +13,6 @@ router.post('/', requireAuth, upload.single('image'), evenementController.create
 router.put('/:id', requireAuth, upload.single('image'), evenementController.update);
 router.delete('/:id', requireAuth, evenementController.remove);
 
+router.post('/:id/images', requireAuth, upload.single('image'), evenementController.addImage);
+
 module.exports = router;

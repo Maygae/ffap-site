@@ -170,6 +170,27 @@ const ETIQUETTES_CATEGORIE = {
   exposition: 'Exposition',
 };
 
+// Construit le HTML d'une grille de cartes evenement/sortie
+function construireCartesActualites(items) {
+  return items.map((item) => {
+    const date = item.date_evenement
+      ? new Date(item.date_evenement).toLocaleDateString('fr-FR', { timeZone: 'UTC' })
+      : '';
+    return `
+      <a class="card" href="evenement-detail.html?id=${item.id}">
+        <div class="card-media">
+          ${item.image ? `<img src="${API_BASE_URL}${item.image}" alt="${item.titre}" />` : ''}
+        </div>
+        <div class="card-body">
+          <span class="card-tag">${ETIQUETTES_CATEGORIE[item.categorie] || item.categorie}</span>
+          <h3>${item.titre}</h3>
+          <p class="texte-secondaire">${[item.lieu, date].filter(Boolean).join(' — ')}</p>
+        </div>
+      </a>
+    `;
+  }).join('');
+}
+
 async function chargerActualites(categorie) {
   const conteneur = document.getElementById('liste-actualites');
   if (!conteneur) return;
@@ -189,23 +210,40 @@ async function chargerActualites(categorie) {
       return;
     }
 
-    conteneur.innerHTML = actualites.map((item) => {
-      const date = item.date_evenement
-        ? new Date(item.date_evenement).toLocaleDateString('fr-FR', { timeZone: 'UTC' })
-        : '';
-      return `
-        <a class="card" href="evenement-detail.html?id=${item.id}">
-          <div class="card-media">
-            ${item.image ? `<img src="${API_BASE_URL}${item.image}" alt="${item.titre}" />` : ''}
-          </div>
-          <div class="card-body">
-            <span class="card-tag">${ETIQUETTES_CATEGORIE[item.categorie] || item.categorie}</span>
-            <h3>${item.titre}</h3>
-            <p class="texte-secondaire">${[item.lieu, date].filter(Boolean).join(' — ')}</p>
-          </div>
-        </a>
+    // Separation "a venir" / "passes" : un contenu sans date est toujours considere a venir
+    // (ex. actualite generale sans evenement precis associe).
+    const aujourdhui = new Date();
+    aujourdhui.setHours(0, 0, 0, 0);
+
+    const aVenir = actualites
+      .filter((item) => !item.date_evenement || new Date(item.date_evenement) >= aujourdhui)
+      .sort((a, b) => new Date(a.date_evenement || 0) - new Date(b.date_evenement || 0));
+
+    const passes = actualites
+      .filter((item) => item.date_evenement && new Date(item.date_evenement) < aujourdhui)
+      .sort((a, b) => new Date(b.date_evenement) - new Date(a.date_evenement));
+
+    let html = '';
+
+    html += `
+      <div class="section-head" style="text-align:left; margin-bottom:20px;">
+        <h2>A venir</h2>
+      </div>
+    `;
+    html += aVenir.length > 0
+      ? `<div class="grid grid-3">${construireCartesActualites(aVenir)}</div>`
+      : '<p class="texte-secondaire">Aucun contenu a venir dans cette categorie pour le moment.</p>';
+
+    if (passes.length > 0) {
+      html += `
+        <div class="section-head" style="text-align:left; margin:48px 0 20px;">
+          <h2>Evenements passes</h2>
+        </div>
+        <div class="grid grid-3">${construireCartesActualites(passes)}</div>
       `;
-    }).join('');
+    }
+
+    conteneur.innerHTML = html;
   } catch (error) {
     conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les actualites. Le serveur back-end est-il demarre ?</p>';
   }
@@ -301,6 +339,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       <p class="texte-secondaire">${[item.lieu, date].filter(Boolean).join(' — ')}</p>
       <div style="margin-top:20px; line-height:1.8;">${paragraphes}</div>
     `;
+
+    const galerie = document.getElementById('galerie-evenement');
+    if (galerie && item.images && item.images.length > 0) {
+      galerie.innerHTML = item.images.map((img) => `
+        <div class="card">
+          <div class="card-media">
+            <img src="${API_BASE_URL}${img.image}" alt="${item.titre}" />
+          </div>
+        </div>
+      `).join('');
+    }
   } catch (error) {
     conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger ce contenu. Le serveur back-end est-il demarre ?</p>';
   }

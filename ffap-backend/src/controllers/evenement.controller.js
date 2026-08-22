@@ -1,4 +1,5 @@
 const evenementModel = require('../models/evenement.model');
+const actualiteImageModel = require('../models/actualite-image.model');
 
 const CATEGORIES_VALIDES = ['evenement', 'sorties', 'exposition'];
 
@@ -28,7 +29,40 @@ async function getOne(req, res) {
     if (!evenement) {
       return res.status(404).json({ error: 'Evenement introuvable' });
     }
-    res.json(evenement);
+    const images = await actualiteImageModel.findByActualite(evenement.id);
+    res.json({ ...evenement, images });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
+}
+
+// POST /api/actualites/:id/images — protege (admin), ajoute une photo a la galerie
+async function addImage(req, res) {
+  if (!req.file) {
+    return res.status(400).json({ error: 'Une image est requise' });
+  }
+
+  try {
+    const evenement = await evenementModel.findById(req.params.id);
+    if (!evenement) {
+      return res.status(404).json({ error: 'Evenement introuvable' });
+    }
+
+    const image = `/uploads/${req.file.filename}`;
+    const id = await actualiteImageModel.create({ actualiteId: req.params.id, image });
+    res.status(201).json({ id, image });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
+}
+
+// DELETE /api/images/:id — protege (admin)
+async function removeImage(req, res) {
+  try {
+    await actualiteImageModel.remove(req.params.id);
+    res.json({ message: 'Image supprimee' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erreur serveur' });
@@ -101,4 +135,4 @@ async function remove(req, res) {
   }
 }
 
-module.exports = { list, getOne, create, update, remove };
+module.exports = { list, getOne, create, update, remove, addImage, removeImage };
