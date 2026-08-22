@@ -196,6 +196,20 @@ section { padding: 56px 0; }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
 
+.actions-grid { row-gap: 40px; }
+.action-item { text-align: center; }
+.action-item svg {
+  width: 56px;
+  height: 56px;
+  fill: none;
+  stroke: var(--bleu-marine);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  margin-bottom: 16px;
+}
+.action-item p { font-weight: 600; font-size: 16px; margin: 0 auto; max-width: 220px; }
+
 .card {
   display: block;
   background: var(--blanc);
