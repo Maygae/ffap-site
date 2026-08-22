@@ -307,6 +307,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .card-tag--evenement { background: rgba(46, 110, 110, 0.12); color: var(--petrol); }
 .card-tag--sorties    { background: rgba(130, 154, 134, 0.18); color: #4E5F51; }
 .card-tag--exposition { background: rgba(82, 120, 184, 0.12); color: var(--bleu-transition); }
+.card-tag--artiste    { background: rgba(15, 40, 96, 0.08); color: var(--bleu-marine); }
 
 /* ===== Deux colonnes (mission) ===== */
 .two-col {

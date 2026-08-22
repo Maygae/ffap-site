@@ -120,8 +120,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             : initiales(artiste.nom)}
         </div>
         <div class="card-body">
+          ${artiste.discipline ? `<span class="card-tag card-tag--artiste">${artiste.discipline}</span>` : ''}
           <h3>${artiste.nom}</h3>
-          <p class="texte-secondaire">${artiste.discipline || ''}</p>
         </div>
       </a>
     `).join('');
@@ -153,8 +153,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             : initiales(artiste.nom)}
         </div>
         <div class="card-body">
+          ${artiste.discipline ? `<span class="card-tag card-tag--artiste">${artiste.discipline}</span>` : ''}
           <h3>${artiste.nom}</h3>
-          <p class="texte-secondaire">${artiste.discipline || ''}</p>
         </div>
       </a>
     `).join('');
