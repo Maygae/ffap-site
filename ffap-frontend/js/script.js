@@ -236,7 +236,7 @@ function construireCartesActualites(items) {
           ${item.image ? `<img src="${API_BASE_URL}${item.image}" alt="${item.titre}" />` : ''}
         </div>
         <div class="card-body">
-          <span class="card-tag">${ETIQUETTES_CATEGORIE[item.categorie] || item.categorie}</span>
+          <span class="card-tag card-tag--${item.categorie}">${ETIQUETTES_CATEGORIE[item.categorie] || item.categorie}</span>
           <h3>${item.titre}</h3>
           <p class="texte-secondaire">${[item.lieu, date].filter(Boolean).join(' — ')}</p>
         </div>
@@ -328,7 +328,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             ${item.image ? `<img src="${API_BASE_URL}${item.image}" alt="${item.titre}" />` : ''}
           </div>
           <div class="card-body">
-            <span class="card-tag">${ETIQUETTES_CATEGORIE[item.categorie] || item.categorie}</span>
+            <span class="card-tag card-tag--${item.categorie}">${ETIQUETTES_CATEGORIE[item.categorie] || item.categorie}</span>
             <h3>${item.titre}</h3>
             <p class="texte-secondaire">${[item.lieu, date].filter(Boolean).join(' — ')}</p>
           </div>
@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     conteneur.innerHTML = `
       ${item.image ? `<div style="margin:24px 0; border-radius:12px; overflow:hidden;"><img src="${API_BASE_URL}${item.image}" alt="${item.titre}" style="width:246px; height:auto; display:block;" /></div>` : ''}
-      <span class="card-tag">${ETIQUETTES_CATEGORIE[item.categorie] || item.categorie}</span>
+      <span class="card-tag card-tag--${item.categorie}">${ETIQUETTES_CATEGORIE[item.categorie] || item.categorie}</span>
       <h1 style="font-size:30px; margin-top:12px;">${item.titre}</h1>
       <p class="texte-secondaire">${[item.lieu, date].filter(Boolean).join(' — ')}</p>
       <div style="margin-top:20px; line-height:1.8;">${paragraphes}</div>
