@@ -22,27 +22,29 @@
   font-display: swap;
 }
 
-/* ===== Variables de la direction artistique (Document 2 + propositions validees) ===== */
+/* ===== Variables de la direction artistique =====
+   Palette personnelle (choix du porteur de projet, hors DA agence) :
+   marine institutionnel + accent emeraude (remplace le bleu #1A6AFF). */
 :root {
   --blanc: #FFFFFF;
   --bleu-marine: #0F2860;
   --gris-clair: #C2C2C2;
   --gris-moyen: #6E6E6E;
   --noir: #000000;
-  --bleu-accent: #1A6AFF;
-  
+  --bleu-accent: #0F6B4C; /* emeraude — nom de variable conserve pour ne pas casser les references CSS existantes */
+
   --font-titres: 'Barlow', sans-serif;
   --font-texte: 'Barlow', sans-serif;
 
   --rayon: 8px;
   --ombre: 0 1px 3px rgba(0, 0, 0, 0.08);
 
-  /* Rampe bleue : nuances utilisees sur les blocs a fond marine
+  /* Rampe : nuances utilisees sur les blocs a fond marine
      (Coordonnees principales, Saison 2026/2027, Newsletter) */
-  --bleu-50: #EEF3FC;   /* fond alterne clair (.section-alt) */
-  --bleu-200: #8DB4F0;  /* eyebrow / accents clairs sur fond marine */
-  --bleu-300: #D8E3F5;  /* texte secondaire sur fond marine */
-  --bleu-500: #1A6AFF;  /* = --bleu-accent */
+  --bleu-50: #EAF4EF;   /* fond alterne clair (.section-alt), teinte verte tres douce */
+  --bleu-200: #7FCBA4;  /* eyebrow / accents clairs sur fond marine (tint emeraude) */
+  --bleu-300: #D8E3F5;  /* texte secondaire neutre sur fond marine */
+  --bleu-500: #0F6B4C;  /* = --bleu-accent (emeraude) */
   --bleu-700: #0F2860;  /* = --bleu-marine */
 }
 
