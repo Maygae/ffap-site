@@ -248,7 +248,7 @@ p  { font-size: 18px; color: var(--bleu-marine); }
 /* Kicker du hero : plus grand et plus espace que les kickers de section,
    pour marquer que c'est le niveau hierarchique le plus haut de la page. */
 .hero .eyebrow { font-size: 16px; letter-spacing: 2.4px; }
-.hero h1 { font-size: 38px; font-weight: 600; margin-bottom: 16px; }
+.hero h1 { font-size: 44px; font-weight: 600; margin-bottom: 16px; }
 .hero p { max-width: 600px; margin: 0 auto 24px; }
 .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
@@ -258,14 +258,17 @@ section { padding: 56px 0; }
 /* Kicker + titre des sections de contenu : plus discrets et alignes a
    gauche (contrairement au hero, centre et proeminent), pour marquer
    un niveau hierarchique subordonne et s'aligner avec le contenu
-   (grilles de cartes, listes) qui suit. */
+   (grilles de cartes, listes) qui suit. Le H2 garde la taille de base
+   (30px) : ratio ~1.47x avec le H1 du hero (44px), dans la fourchette visee. */
 .section-head {
   text-align: left;
   max-width: 640px;
   margin: 0 0 36px;
 }
 .section-head .eyebrow { font-weight: 500; }
-.section-head h2 { font-size: 26px; }
+/* Paragraphe de section : neutre et desature, pour rester au second plan
+   derriere le H2 (contrairement au hero ou le paragraphe est plus visible). */
+.section-head p { color: #6B7A99; }
 
 /* ===== Grilles et cartes ===== */
 .grid { display: grid; gap: 20px; }
