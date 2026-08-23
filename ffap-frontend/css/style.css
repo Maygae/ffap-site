@@ -184,8 +184,14 @@ p  { font-size: 18px; color: var(--bleu-marine); }
   text-transform: uppercase;
   letter-spacing: 0.4px;
   color: var(--bleu-marine);
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
 }
 .nav-links a:hover { color: var(--bleu-transition); }
+.nav-links a.active {
+  color: var(--bleu-transition);
+  border-bottom-color: var(--bleu-transition);
+}
 
 .nav-search { display: flex; align-items: center; position: relative; }
 .nav-search-toggle {
