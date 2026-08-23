@@ -243,6 +243,7 @@ p  { font-size: 18px; color: var(--bleu-marine); }
   padding: 64px 0;
   text-align: center;
 }
+.hero .container { max-width: 760px; }
 .eyebrow {
   display: block;
   font-size: 13px;
