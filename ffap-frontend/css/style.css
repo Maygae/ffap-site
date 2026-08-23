@@ -248,7 +248,7 @@ p  { font-size: 18px; color: var(--bleu-marine); }
 /* Kicker du hero : plus grand et plus espace que les kickers de section,
    pour marquer que c'est le niveau hierarchique le plus haut de la page. */
 .hero .eyebrow { font-size: 16px; letter-spacing: 2.4px; }
-.hero h1 { font-size: 44px; font-weight: 600; margin-bottom: 16px; }
+.hero h1 { font-size: 44px; font-weight: 900; margin-bottom: 16px; }
 .hero p { max-width: 600px; margin: 0 auto 24px; }
 .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
