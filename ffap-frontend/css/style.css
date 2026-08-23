@@ -245,14 +245,27 @@ p  { font-size: 18px; color: var(--bleu-marine); }
   color: var(--bleu-transition);
   margin-bottom: 10px;
 }
-.hero h1 { margin-bottom: 16px; }
-.hero p { max-width: 520px; margin: 0 auto 24px; }
+/* Kicker du hero : plus grand et plus espace que les kickers de section,
+   pour marquer que c'est le niveau hierarchique le plus haut de la page. */
+.hero .eyebrow { font-size: 16px; letter-spacing: 2.4px; }
+.hero h1 { font-size: 38px; font-weight: 600; margin-bottom: 16px; }
+.hero p { max-width: 600px; margin: 0 auto 24px; }
 .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
 /* ===== Sections ===== */
 section { padding: 56px 0; }
 .section-alt { background: var(--bleu-50); }
-.section-head { text-align: center; max-width: 560px; margin: 0 auto 36px; }
+/* Kicker + titre des sections de contenu : plus discrets et alignes a
+   gauche (contrairement au hero, centre et proeminent), pour marquer
+   un niveau hierarchique subordonne et s'aligner avec le contenu
+   (grilles de cartes, listes) qui suit. */
+.section-head {
+  text-align: left;
+  max-width: 640px;
+  margin: 0 0 36px;
+}
+.section-head .eyebrow { font-weight: 500; }
+.section-head h2 { font-size: 26px; }
 
 /* ===== Grilles et cartes ===== */
 .grid { display: grid; gap: 20px; }
