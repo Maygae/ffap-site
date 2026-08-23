@@ -133,15 +133,17 @@ p  { font-size: 18px; color: var(--bleu-marine); }
   background: var(--bleu-marine);
   color: var(--blanc);
 }
+/* Boutons de filtre : remplis en permanence de la couleur de leur categorie
+   (meme code que les etiquettes des cartes), actif ou non. */
+[data-filtre="tout"]       { background: var(--terracotta); color: var(--blanc); border-color: var(--terracotta); }
+[data-filtre="evenement"]  { background: var(--petrol); color: var(--blanc); border-color: var(--petrol); }
+[data-filtre="sorties"]    { background: #4E5F51; color: var(--blanc); border-color: #4E5F51; }
+[data-filtre="exposition"] { background: var(--bleu-transition); color: var(--blanc); border-color: var(--bleu-transition); }
+
+/* Le bouton actif se distingue par un liseret marine autour de lui */
 .filtre-actif {
-  background: var(--bleu-accent);
-  color: var(--blanc);
-  border-color: var(--bleu-accent);
+  box-shadow: 0 0 0 3px var(--blanc), 0 0 0 5px var(--bleu-marine);
 }
-/* Meme code couleur que les etiquettes de categorie sur les cartes */
-.filtre-actif[data-filtre="evenement"] { background: var(--petrol); border-color: var(--petrol); }
-.filtre-actif[data-filtre="sorties"]   { background: #4E5F51; border-color: #4E5F51; }
-.filtre-actif[data-filtre="exposition"] { background: var(--bleu-transition); border-color: var(--bleu-transition); }
 
 /* ===== En-tete ===== */
 .site-header {
