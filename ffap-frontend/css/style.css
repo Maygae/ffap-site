@@ -42,8 +42,9 @@
   --bleu-transition: #35528F;
   --terracotta: #C9654B;
   --petrol: #2E6E6E;
-  --sauge: #829A86;
+  --sauge: #829A86; /* decision : non utilisee directement, sert uniquement de source pour ses derives (tint et version assombrie ci-dessous) */
   --sauge-tint: #EEF1EC; /* sauge tres eclaircie, pour les fonds de section */
+  --sauge-fonce: #4E5F51; /* sauge assombrie, pour l'etiquette/filtre "Sorties" */
 
   --bleu-accent: var(--terracotta); /* nom de variable conserve pour ne pas casser les references CSS existantes ; sert desormais uniquement aux boutons/CTA */
 
@@ -137,7 +138,7 @@ p  { font-size: 18px; color: var(--bleu-marine); }
    (meme code que les etiquettes des cartes), actif ou non. */
 [data-filtre="tout"]       { background: var(--terracotta); color: var(--blanc); border-color: var(--terracotta); }
 [data-filtre="evenement"]  { background: var(--petrol); color: var(--blanc); border-color: var(--petrol); }
-[data-filtre="sorties"]    { background: #4E5F51; color: var(--blanc); border-color: #4E5F51; }
+[data-filtre="sorties"]    { background: var(--sauge-fonce); color: var(--blanc); border-color: var(--sauge-fonce); }
 [data-filtre="exposition"] { background: var(--bleu-transition); color: var(--blanc); border-color: var(--bleu-transition); }
 
 /* Le bouton actif se distingue par un liseret marine autour de lui */
@@ -329,7 +330,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 }
 /* Une couleur par categorie, pour les reperer d'un coup d'oeil */
 .card-tag--evenement { background: rgba(46, 110, 110, 0.12); color: var(--petrol); }
-.card-tag--sorties    { background: rgba(130, 154, 134, 0.18); color: #4E5F51; }
+.card-tag--sorties    { background: rgba(130, 154, 134, 0.18); color: var(--sauge-fonce); }
 .card-tag--exposition { background: rgba(82, 120, 184, 0.12); color: var(--bleu-transition); }
 .card-tag--artiste    { background: rgba(15, 40, 96, 0.08); color: var(--bleu-marine); }
 
