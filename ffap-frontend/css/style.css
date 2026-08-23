@@ -241,7 +241,7 @@ p  { font-size: 18px; color: var(--bleu-marine); }
 .hero {
   background: var(--bleu-50);
   padding: 64px 0;
-  text-align: left;
+  text-align: center;
 }
 .hero .container { max-width: 760px; }
 .eyebrow {
@@ -257,8 +257,8 @@ p  { font-size: 18px; color: var(--bleu-marine); }
    pour marquer que c'est le niveau hierarchique le plus haut de la page. */
 .hero .eyebrow { font-size: 16px; letter-spacing: 2.4px; }
 .hero h1 { font-size: 44px; font-weight: 900; margin-bottom: 16px; }
-.hero p { max-width: 600px; margin: 0 0 24px; }
-.hero-actions { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; }
+.hero p { max-width: 600px; margin: 0 auto 24px; }
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
 /* ===== Sections ===== */
 section { padding: 56px 0; }
