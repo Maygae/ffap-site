@@ -671,13 +671,14 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
     z-index: 20;
     min-width: 220px;
     flex-direction: column;
-    gap: 14px;
+    gap: 0;
     background: var(--blanc);
     border: 1px solid var(--gris-clair);
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(15, 40, 96, 0.14);
-    padding: 18px 22px;
+    padding: 18px 28px 20px;
   }
+  .nav-links a { padding: 10px 0; line-height: 1.2; }
   .nav-links.nav-links-open { display: flex; }
   /* Voile derriere le panneau : evite que le menu donne l'impression de
      "casser" la mise en page en masquant partiellement le titre du hero. */
