@@ -146,17 +146,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     conteneur.innerHTML = artistes.slice(0, 3).map((artiste) => `
-      <a class="card" href="artiste-detail.html?id=${artiste.id}">
+      <div class="card card-non-cliquable">
         <div class="card-media">
-          ${artiste.photo
-            ? `<img src="${API_BASE_URL}${artiste.photo}" alt="${artiste.nom}" />`
-            : initiales(artiste.nom)}
+          ${initiales(artiste.nom)}
         </div>
         <div class="card-body">
           ${artiste.discipline ? `<span class="card-tag card-tag--artiste">${artiste.discipline}</span>` : ''}
           <h3>${artiste.nom}</h3>
         </div>
-      </a>
+      </div>
     `).join('');
   } catch (error) {
     conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les artistes. Le serveur back-end est-il demarre ?</p>';
