@@ -367,6 +367,20 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   max-width: 960px;
   margin: 0 auto;
 }
+/* ===== Bloc editorial Nos artistes (accueil) : visuel encadre, contain ===== */
+.visuel-cadre {
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--sauge-tint);
+  aspect-ratio: 4 / 3;
+}
+.visuel-cadre img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .value-list { list-style: none; margin-top: 16px; }
 .value-list li {
   padding-left: 22px;
@@ -640,6 +654,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   .nav-links.nav-links-open { display: flex; }
   .nav-toggle { display: flex; }
   .two-col { grid-template-columns: 1fr; }
+  .visuel-cadre { aspect-ratio: 16 / 9; margin-top: 24px; }
   .grid-4, .grid-3 { grid-template-columns: 1fr 1fr; }
   h1 { font-size: 30px; }
   h2 { font-size: 24px; }
