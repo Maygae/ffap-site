@@ -665,8 +665,8 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   .nav-links {
     display: none;
     position: absolute;
-    top: calc(100% + 8px);
-    right: 24px;
+    top: 100%;
+    right: 14px;
     left: auto;
     min-width: 220px;
     flex-direction: column;
