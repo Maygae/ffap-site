@@ -28,20 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="index.html">Accueil</a>
         <a href="artistes.html">Artistes</a>
         <a href="associations.html">Associations</a>
+        <a href="actualites.html">Evenements &amp; Sorties</a>
+        <a href="federation.html">A propos</a>
+        <a href="contact.html">Contact</a>
       </div>
 
       <div class="footer-col">
         <h3>Informations</h3>
-        <a href="actualites.html">Evenements &amp; Sorties</a>
-        <a href="federation.html">A propos</a>
-        <a href="contact.html">Contact</a>
-        <a href="https://www.helloasso.com/associations/federation-francaise-des-arts-plastiques-f-f-a-p/adhesions/adhesion-f-f-a-p-2026-2027" target="_blank" rel="noopener noreferrer">Adherer</a>
+        <a href="index.html#rejoindre-nous">Adherer</a>
+        <a href="mentions-legales.html">Mentions legales</a>
       </div>
     </div>
 
     <div class="footer-bottom">
       <p class="footer-copyright">&copy; 2026 F.F.A.P. réaliser par Maygae</p>
-      <a href="mentions-legales.html" class="footer-copyright" style="text-decoration:underline;">Mentions legales</a>
     </div>
   `;
 });
