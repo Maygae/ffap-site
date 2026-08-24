@@ -35,8 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <div class="footer-col">
         <h3>Informations</h3>
-        <a href="index.html#rejoindre-nous">Adherer</a>
-        <a href="mentions-legales.html">Mentions legales</a>
+        <div class="footer-info-row">
+          <a href="index.html#rejoindre-nous">Adherer</a>
+          <span aria-hidden="true">&middot;</span>
+          <a href="mentions-legales.html">Mentions legales</a>
+        </div>
       </div>
     </div>
 
