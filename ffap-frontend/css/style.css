@@ -263,6 +263,7 @@ p  { font-size: 18px; color: var(--bleu-marine); }
 /* ===== Sections ===== */
 section { padding: 56px 0; }
 .section-alt { background: var(--bleu-50); }
+.section-compacte { padding: 88px 0; }
 /* Kicker + titre des sections de contenu : plus discrets et alignes a
    gauche (contrairement au hero, centre et proeminent), pour marquer
    un niveau hierarchique subordonne et s'aligner avec le contenu
