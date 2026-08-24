@@ -678,7 +678,10 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 }
 
 @media (max-width: 480px) {
-  .grid-4, .grid-3 { grid-template-columns: 1fr; }
+  .grid-4, .grid-3 { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .card-media { height: 110px; }
+  .card-body { padding: 10px 12px; }
+  .card-body h3 { font-size: 14px; }
   .logo-mark { height: 60px; }
   .footer-inner { grid-template-columns: 1fr; padding: 40px 24px 32px; text-align: center; }
   .footer-brand .footer-logo-badge { margin: 0 auto 16px; }
