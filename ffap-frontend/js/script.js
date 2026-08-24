@@ -98,8 +98,25 @@ function initiales(nom) {
 }
 
 // ===== Liste des artistes (page artistes.html) — GET /api/artistes =====
+function construireCartesArtistes(artistes) {
+  return artistes.map((artiste) => `
+    <a class="card" href="artiste-detail.html?id=${artiste.id}">
+      <div class="card-media">
+        ${artiste.photo
+          ? `<img src="${API_BASE_URL}${artiste.photo}" alt="${artiste.nom}" />`
+          : initiales(artiste.nom)}
+      </div>
+      <div class="card-body">
+        ${artiste.discipline ? `<span class="card-tag card-tag--artiste">${artiste.discipline}</span>` : ''}
+        <h3>${artiste.nom}</h3>
+      </div>
+    </a>
+  `).join('');
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   const conteneur = document.getElementById('liste-artistes');
+  const zoneFiltres = document.getElementById('filtres-artistes');
   if (!conteneur) return;
 
   try {
@@ -112,19 +129,33 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    conteneur.innerHTML = artistes.map((artiste) => `
-      <a class="card" href="artiste-detail.html?id=${artiste.id}">
-        <div class="card-media">
-          ${artiste.photo
-            ? `<img src="${API_BASE_URL}${artiste.photo}" alt="${artiste.nom}" />`
-            : initiales(artiste.nom)}
-        </div>
-        <div class="card-body">
-          ${artiste.discipline ? `<span class="card-tag card-tag--artiste">${artiste.discipline}</span>` : ''}
-          <h3>${artiste.nom}</h3>
-        </div>
-      </a>
-    `).join('');
+    // Filtre par discipline, construit dynamiquement a partir des disciplines
+    // presentes en base (pas de liste figee, contrairement aux categories d'actualites).
+    if (zoneFiltres) {
+      const disciplines = [...new Set(artistes.map((a) => a.discipline).filter(Boolean))].sort();
+
+      if (disciplines.length > 1) {
+        zoneFiltres.innerHTML = `
+          <button class="btn btn-secondaire filtre-actif" data-discipline="tout">Tous</button>
+          ${disciplines.map((d) => `<button class="btn btn-secondaire" data-discipline="${d}">${d}</button>`).join('')}
+        `;
+
+        const boutons = zoneFiltres.querySelectorAll('[data-discipline]');
+        boutons.forEach((bouton) => {
+          bouton.addEventListener('click', () => {
+            boutons.forEach((b) => b.classList.remove('filtre-actif'));
+            bouton.classList.add('filtre-actif');
+            const choix = bouton.dataset.discipline;
+            const filtres = choix === 'tout' ? artistes : artistes.filter((a) => a.discipline === choix);
+            conteneur.innerHTML = filtres.length > 0
+              ? construireCartesArtistes(filtres)
+              : '<p class="texte-secondaire">Aucun artiste dans cette discipline pour le moment.</p>';
+          });
+        });
+      }
+    }
+
+    conteneur.innerHTML = construireCartesArtistes(artistes);
   } catch (error) {
     conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les artistes. Le serveur back-end est-il demarre ?</p>';
   }
