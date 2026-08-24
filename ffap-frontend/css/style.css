@@ -458,6 +458,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .form-consentement input { margin-top: 4px; }
 
 /* ===== Coordonnees principales (page Contact) ===== */
+.section-coordonnees { padding: 0; background: var(--bleu-marine); }
 .coordonnees {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -465,9 +466,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   align-items: center;
   max-width: 860px;
   margin: 0 auto;
-  padding: 48px;
-  background: var(--bleu-marine);
-  border-radius: 16px;
+  padding: 56px 24px;
   color: var(--blanc);
 }
 .coordonnees h2 { color: var(--blanc); margin-bottom: 20px; }
