@@ -680,6 +680,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
     padding: 18px 28px 20px;
   }
   .nav-links a { padding: 10px 0; line-height: 1.2; }
+  .nav-links a.active { border-bottom-color: transparent; }
   .nav-links.nav-links-open { display: flex; }
   .nav-toggle { display: flex; }
   .two-col { grid-template-columns: 1fr; }
