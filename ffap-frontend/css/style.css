@@ -258,6 +258,28 @@ p  { font-size: 18px; color: var(--bleu-marine); }
 .hero .eyebrow { font-size: 16px; letter-spacing: 2.4px; }
 .hero h1 { font-size: 40px; font-weight: 600; margin-bottom: 16px; }
 .hero p { max-width: 600px; margin: 0 auto 24px; }
+/* Variante compacte : pages avec peu de contenu (ex. Artistes tant que le
+   catalogue est petit) — memes couleurs/typo, hauteur reduite d'environ 1/3. */
+.hero--compact { padding: 42px 0; }
+
+/* ===== Repere discret au-dessus d'une grille (nombre de resultats) =====
+   Remplace un filtre quand le volume de contenu est trop faible pour le justifier. */
+.repere-liste {
+  font-size: 14px;
+  color: var(--gris-moyen);
+  margin-bottom: 24px;
+}
+
+/* ===== Bloc CTA compact (ex. recrutement artistes en bas de page) ===== */
+.cta-compact {
+  background: var(--sauge-tint);
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  margin-top: 48px;
+}
+.cta-compact h2 { margin-bottom: 8px; }
+.cta-compact p { color: var(--gris-moyen); margin: 0 auto 20px; max-width: 480px; }
 .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
 /* ===== Sections ===== */

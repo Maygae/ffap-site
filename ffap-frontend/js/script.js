@@ -114,9 +114,16 @@ function construireCartesArtistes(artistes) {
   `).join('');
 }
 
+// Seuils a partir desquels le filtre par discipline redevient pertinent.
+// Tant que le catalogue est petit (federation recente), on l'affiche sous
+// forme de repere texte plutot que comme un vrai selecteur.
+const SEUIL_ARTISTES_POUR_FILTRE = 8;
+const SEUIL_DISCIPLINES_POUR_FILTRE = 4;
+
 document.addEventListener('DOMContentLoaded', async () => {
   const conteneur = document.getElementById('liste-artistes');
   const zoneFiltres = document.getElementById('filtres-artistes');
+  const repere = document.getElementById('repere-artistes');
   if (!conteneur) return;
 
   try {
@@ -129,28 +136,38 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
+    const disciplines = [...new Set(artistes.map((a) => a.discipline).filter(Boolean))].sort();
+    const filtreActive = artistes.length >= SEUIL_ARTISTES_POUR_FILTRE && disciplines.length >= SEUIL_DISCIPLINES_POUR_FILTRE;
+
+    // Repere discret au-dessus de la grille : nombre d'artistes + disciplines,
+    // affiche tant que le filtre reste masque.
+    if (repere) {
+      const texteNombre = `${artistes.length} artiste${artistes.length > 1 ? 's' : ''} reference${artistes.length > 1 ? 's' : ''}`;
+      const texteDisciplines = disciplines.length > 0 ? disciplines.join(', ') : 'Toutes les disciplines';
+      repere.textContent = filtreActive ? '' : `${texteNombre} · ${texteDisciplines}`;
+    }
+
     // Filtre par discipline, construit dynamiquement a partir des disciplines
     // presentes en base (pas de liste figee, contrairement aux categories d'actualites).
-    if (zoneFiltres) {
-      const disciplines = [...new Set(artistes.map((a) => a.discipline).filter(Boolean))].sort();
+    // Masque tant que le catalogue est trop petit pour le justifier (cf. seuils ci-dessus) ;
+    // se reactive automatiquement des que le catalogue grandit, sans changement de structure.
+    if (zoneFiltres && filtreActive) {
+      zoneFiltres.style.display = '';
+      zoneFiltres.innerHTML = `
+        <label for="select-discipline" style="display:block; font-size:13px; font-weight:600; margin-bottom:8px;">Filtrer par discipline</label>
+        <select id="select-discipline" class="select-filtre">
+          <option value="tout">Toutes les disciplines</option>
+          ${disciplines.map((d) => `<option value="${d}">${d}</option>`).join('')}
+        </select>
+      `;
 
-      if (disciplines.length > 1) {
-        zoneFiltres.innerHTML = `
-          <label for="select-discipline" style="display:block; font-size:13px; font-weight:600; margin-bottom:8px;">Filtrer par discipline</label>
-          <select id="select-discipline" class="select-filtre">
-            <option value="tout">Toutes les disciplines</option>
-            ${disciplines.map((d) => `<option value="${d}">${d}</option>`).join('')}
-          </select>
-        `;
-
-        document.getElementById('select-discipline').addEventListener('change', (e) => {
-          const choix = e.target.value;
-          const filtres = choix === 'tout' ? artistes : artistes.filter((a) => a.discipline === choix);
-          conteneur.innerHTML = filtres.length > 0
-            ? construireCartesArtistes(filtres)
-            : '<p class="texte-secondaire">Aucun artiste dans cette discipline pour le moment.</p>';
-        });
-      }
+      document.getElementById('select-discipline').addEventListener('change', (e) => {
+        const choix = e.target.value;
+        const filtres = choix === 'tout' ? artistes : artistes.filter((a) => a.discipline === choix);
+        conteneur.innerHTML = filtres.length > 0
+          ? construireCartesArtistes(filtres)
+          : '<p class="texte-secondaire">Aucun artiste dans cette discipline pour le moment.</p>';
+      });
     }
 
     conteneur.innerHTML = construireCartesArtistes(artistes);
