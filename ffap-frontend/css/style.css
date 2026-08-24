@@ -567,7 +567,6 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .site-footer {
   background: var(--blanc);
   color: var(--bleu-marine);
-  margin-top: 40px;
 }
 .site-footer a { color: var(--bleu-marine); opacity: 0.85; text-decoration: none; }
 .site-footer a:hover { opacity: 1; color: var(--bleu-transition); }
