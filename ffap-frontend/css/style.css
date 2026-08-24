@@ -665,15 +665,17 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   .nav-links {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+    top: calc(100% + 8px);
+    right: 24px;
+    left: auto;
+    min-width: 220px;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     background: var(--blanc);
-    border-top: 1px solid var(--gris-clair);
-    border-bottom: 1px solid var(--gris-clair);
-    padding: 20px 24px;
+    border: 1px solid var(--gris-clair);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(15, 40, 96, 0.14);
+    padding: 18px 22px;
   }
   .nav-links.nav-links-open { display: flex; }
   .nav-toggle { display: flex; }
