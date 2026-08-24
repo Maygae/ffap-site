@@ -655,6 +655,7 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   /* Priorite mobile : Logo -> Adherer -> Menu. La recherche passe au second
      plan (elle reste accessible depuis le menu ouvert, cf. nav-links). */
   .nav-search { display: none; }
+  .site-header { border-bottom: none; }
   .logo-mark { height: 80px; }
   .nav-cta { gap: 10px; }
   .nav-cta .btn-cta-externe { padding: 10px 18px; font-size: 14px; }
