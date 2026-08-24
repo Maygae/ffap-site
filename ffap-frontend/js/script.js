@@ -136,21 +136,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       if (disciplines.length > 1) {
         zoneFiltres.innerHTML = `
-          <button class="btn btn-secondaire filtre-actif" data-discipline="tout">Tous</button>
-          ${disciplines.map((d) => `<button class="btn btn-secondaire" data-discipline="${d}">${d}</button>`).join('')}
+          <label for="select-discipline" style="display:block; font-size:13px; font-weight:600; margin-bottom:8px;">Filtrer par discipline</label>
+          <select id="select-discipline" class="select-filtre">
+            <option value="tout">Toutes les disciplines</option>
+            ${disciplines.map((d) => `<option value="${d}">${d}</option>`).join('')}
+          </select>
         `;
 
-        const boutons = zoneFiltres.querySelectorAll('[data-discipline]');
-        boutons.forEach((bouton) => {
-          bouton.addEventListener('click', () => {
-            boutons.forEach((b) => b.classList.remove('filtre-actif'));
-            bouton.classList.add('filtre-actif');
-            const choix = bouton.dataset.discipline;
-            const filtres = choix === 'tout' ? artistes : artistes.filter((a) => a.discipline === choix);
-            conteneur.innerHTML = filtres.length > 0
-              ? construireCartesArtistes(filtres)
-              : '<p class="texte-secondaire">Aucun artiste dans cette discipline pour le moment.</p>';
-          });
+        document.getElementById('select-discipline').addEventListener('change', (e) => {
+          const choix = e.target.value;
+          const filtres = choix === 'tout' ? artistes : artistes.filter((a) => a.discipline === choix);
+          conteneur.innerHTML = filtres.length > 0
+            ? construireCartesArtistes(filtres)
+            : '<p class="texte-secondaire">Aucun artiste dans cette discipline pour le moment.</p>';
         });
       }
     }
