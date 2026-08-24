@@ -680,15 +680,6 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   }
   .nav-links a { padding: 10px 0; line-height: 1.2; }
   .nav-links.nav-links-open { display: flex; }
-  /* Voile derriere le panneau : evite que le menu donne l'impression de
-     "casser" la mise en page en masquant partiellement le titre du hero. */
-  .nav-links.nav-links-open::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 40, 96, 0.35);
-    z-index: -1;
-  }
   .nav-toggle { display: flex; }
   .two-col { grid-template-columns: 1fr; }
   .visuel-cadre { aspect-ratio: 16 / 9; margin-top: 24px; }
