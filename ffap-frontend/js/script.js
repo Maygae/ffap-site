@@ -478,7 +478,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     conteneur.innerHTML = associations.map((asso) => `
-      <a class="card" href="association-detail.html?id=${asso.id}">
+      <a class="card card--association" href="association-detail.html?id=${asso.id}">
         <div class="card-media" style="background:#fff; height:220px;">
           ${asso.logo
             ? `<img src="${API_BASE_URL}${asso.logo}" alt="Logo ${asso.nom}" style="width:100%; height:100%; object-fit:contain; padding:4px;" />`

@@ -327,6 +327,12 @@ section { padding: 56px 0; }
   transition: box-shadow 0.15s ease;
 }
 a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+/* Variante plus douce (page Associations) : bordure allegee, fond blanc casse
+   plutot que le gris utilitaire, pour eviter un rendu "administratif". */
+.card--association {
+  border-color: rgba(15, 40, 96, 0.08);
+  background: #FAFAF8;
+}
 .card-media {
   height: 160px;
   background: #E6F1FB;
