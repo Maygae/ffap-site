@@ -1,5 +1,5 @@
 // Comportement du menu mobile : affiche/masque les liens de navigation
-// Objectif : sur petit ecran, la nav est cachee par defaut (voir CSS @media),
+// Objectif : sur petit écran, la nav est cachée par défaut (voir CSS @media),
 // ce bouton permet de l'afficher/masquer au clic.
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Barre de recherche du header : au clic sur la loupe, affiche le champ ;
-// a la soumission, cherche le terme parmi artistes / associations / evenements
-// et redirige vers la premiere fiche correspondante.
+// à la soumission, cherche le terme parmi artistes / associations / événements
+// et redirige vers la première fiche correspondante.
 document.addEventListener('DOMContentLoaded', () => {
   const zoneRecherche = document.getElementById('nav-search');
   const boutonRecherche = document.getElementById('nav-search-toggle');
@@ -60,17 +60,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      alert('Aucun resultat pour « ' + inputRecherche.value + ' ».');
+      alert('Aucun résultat pour « ' + inputRecherche.value + ' ».');
     } catch (erreur) {
       console.error('Erreur recherche :', erreur);
-      alert('La recherche est momentanement indisponible.');
+      alert('La recherche est momentanément indisponible.');
     }
   });
 });
 
-// Newsletter : pas encore de vrai service d'envoi branche (hors perimetre actuel du projet).
-// On bloque juste la soumission et on informe le visiteur, en attendant une decision
-// sur l'outil a utiliser (ex. Brevo, Mailchimp) pour la collecte reelle des emails.
+// Newsletter : pas encore de vrai service d'envoi branché (hors périmètre actuel du projet).
+// On bloque juste la soumission et on informe le visiteur, en attendant une décision
+// sur l'outil à utiliser (ex. Brevo, Mailchimp) pour la collecte réelle des emails.
 document.addEventListener('DOMContentLoaded', () => {
   const formNewsletter = document.getElementById('form-newsletter');
   const note = document.getElementById('newsletter-note');
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   formNewsletter.addEventListener('submit', (event) => {
     event.preventDefault();
-    note.textContent = 'Fonctionnalite en cours de mise en place, merci de votre patience.';
+    note.textContent = 'Fonctionnalité en cours de mise en place, merci de votre patience.';
   });
 });
 
@@ -86,7 +86,7 @@ const API_BASE_URL = 'http://localhost:3000';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Renvoie les initiales d'un nom (ex. "Martine de Santis" -> "MD"),
-// utilisees comme visuel de remplacement quand aucune photo n'est renseignee.
+// utilisées comme visuel de remplacement quand aucune photo n'est renseignée.
 function initiales(nom) {
   return nom
     .split(' ')
@@ -114,9 +114,9 @@ function construireCartesArtistes(artistes) {
   `).join('');
 }
 
-// Seuils a partir desquels le filtre par discipline redevient pertinent.
-// Tant que le catalogue est petit (federation recente), on l'affiche sous
-// forme de repere texte plutot que comme un vrai selecteur.
+// Seuils à partir desquels le filtre par discipline redevient pertinent.
+// Tant que le catalogue est petit (fédération récente), on l'affiche sous
+// forme de repère texte plutôt que comme un vrai sélecteur.
 const SEUIL_ARTISTES_POUR_FILTRE = 8;
 const SEUIL_DISCIPLINES_POUR_FILTRE = 4;
 
@@ -139,18 +139,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     const disciplines = [...new Set(artistes.map((a) => a.discipline).filter(Boolean))].sort();
     const filtreActive = artistes.length >= SEUIL_ARTISTES_POUR_FILTRE && disciplines.length >= SEUIL_DISCIPLINES_POUR_FILTRE;
 
-    // Repere discret au-dessus de la grille : nombre d'artistes + disciplines,
-    // affiche tant que le filtre reste masque.
+    // Repère discret au-dessus de la grille : nombre d'artistes + disciplines,
+    // affiché tant que le filtre reste masqué.
     if (repere) {
-      const texteNombre = `${artistes.length} artiste${artistes.length > 1 ? 's' : ''} reference${artistes.length > 1 ? 's' : ''}`;
+      const texteNombre = `${artistes.length} artiste${artistes.length > 1 ? 's' : ''} référencé${artistes.length > 1 ? 's' : ''}`;
       const texteDisciplines = disciplines.length > 0 ? disciplines.join(', ') : 'Toutes les disciplines';
       repere.textContent = filtreActive ? '' : `${texteNombre} · ${texteDisciplines}`;
     }
 
-    // Filtre par discipline, construit dynamiquement a partir des disciplines
-    // presentes en base (pas de liste figee, contrairement aux categories d'actualites).
-    // Masque tant que le catalogue est trop petit pour le justifier (cf. seuils ci-dessus) ;
-    // se reactive automatiquement des que le catalogue grandit, sans changement de structure.
+    // Filtre par discipline, construit dynamiquement à partir des disciplines
+    // présentes en base (pas de liste figée, contrairement aux catégories d'actualités).
+    // Masqué tant que le catalogue est trop petit pour le justifier (cf. seuils ci-dessus) ;
+    // se réactive automatiquement dès que le catalogue grandit, sans changement de structure.
     if (zoneFiltres && filtreActive) {
       zoneFiltres.style.display = '';
       zoneFiltres.innerHTML = `
@@ -172,11 +172,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     conteneur.innerHTML = construireCartesArtistes(artistes);
   } catch (error) {
-    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les artistes. Le serveur back-end est-il demarre ?</p>';
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les artistes. Le serveur back-end est-il démarré ?</p>';
   }
 });
 
-// ===== Apercu des artistes sur la homepage (index.html) — GET /api/artistes =====
+// ===== Aperçu des artistes sur la homepage (index.html) — GET /api/artistes =====
 document.addEventListener('DOMContentLoaded', async () => {
   const conteneur = document.getElementById('liste-artistes-accueil');
   if (!conteneur) return;
@@ -203,11 +203,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
     `).join('');
   } catch (error) {
-    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les artistes. Le serveur back-end est-il demarre ?</p>';
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les artistes. Le serveur back-end est-il démarré ?</p>';
   }
 });
 
-// ===== Fiche detail d'un artiste (page artiste-detail.html) — GET /api/artistes/:id =====
+// ===== Fiche détail d'un artiste (page artiste-detail.html) — GET /api/artistes/:id =====
 document.addEventListener('DOMContentLoaded', async () => {
   const conteneur = document.getElementById('fiche-artiste');
   if (!conteneur) return;
@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const galerie = document.getElementById('galerie-oeuvres');
     if (galerie) {
       if (!artiste.oeuvres || artiste.oeuvres.length === 0) {
-        galerie.innerHTML = '<p class="texte-secondaire" style="text-align:center;">Aucune oeuvre publiee pour le moment.</p>';
+        galerie.innerHTML = '<p class="texte-secondaire" style="text-align:center;">Aucune œuvre publiée pour le moment.</p>';
       } else {
         galerie.innerHTML = artiste.oeuvres.map((oeuvre) => `
           <div class="card">
@@ -257,18 +257,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
   } catch (error) {
-    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger cet artiste. Le serveur back-end est-il demarre ?</p>';
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger cet artiste. Le serveur back-end est-il démarré ?</p>';
   }
 });
 
-// ===== Actualites & evenements (page actualites.html) — GET /api/actualites =====
+// ===== Actualités & événements (page actualites.html) — GET /api/actualites =====
 const ETIQUETTES_CATEGORIE = {
-  evenement: 'Evenement',
+  evenement: 'Événement',
   sorties: 'Sorties',
   exposition: 'Exposition',
 };
 
-// Construit le HTML d'une grille de cartes evenement/sortie
+// Construit le HTML d'une grille de cartes événement/sortie
 function construireCartesActualites(items) {
   return items.map((item) => {
     const date = item.date_evenement
@@ -304,12 +304,12 @@ async function chargerActualites(categorie) {
     const actualites = await reponse.json();
 
     if (actualites.length === 0) {
-      conteneur.innerHTML = '<p class="texte-secondaire">Aucun contenu dans cette categorie pour le moment.</p>';
+      conteneur.innerHTML = '<p class="texte-secondaire">Aucun contenu dans cette catégorie pour le moment.</p>';
       return;
     }
 
-    // Separation "a venir" / "passes" : un contenu sans date est toujours considere a venir
-    // (ex. actualite generale sans evenement precis associe).
+    // Séparation "à venir" / "passés" : un contenu sans date est toujours considéré à venir
+    // (ex. actualité générale sans événement précis associé).
     const aujourdhui = new Date();
     aujourdhui.setHours(0, 0, 0, 0);
 
@@ -325,17 +325,17 @@ async function chargerActualites(categorie) {
 
     html += `
       <div class="section-head" style="text-align:left; margin-bottom:20px;">
-        <h2>A venir</h2>
+        <h2>À venir</h2>
       </div>
     `;
     html += aVenir.length > 0
       ? `<div class="grid grid-3">${construireCartesActualites(aVenir)}</div>`
-      : '<p class="texte-secondaire">Aucun contenu a venir dans cette categorie pour le moment.</p>';
+      : '<p class="texte-secondaire">Aucun contenu à venir dans cette catégorie pour le moment.</p>';
 
     if (passes.length > 0) {
       html += `
         <div class="section-head" style="text-align:left; margin:48px 0 20px;">
-          <h2>Evenements passes</h2>
+          <h2>Événements passés</h2>
         </div>
         <div class="grid grid-3">${construireCartesActualites(passes)}</div>
       `;
@@ -343,11 +343,11 @@ async function chargerActualites(categorie) {
 
     conteneur.innerHTML = html;
   } catch (error) {
-    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les actualites. Le serveur back-end est-il demarre ?</p>';
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les actualités. Le serveur back-end est-il démarré ?</p>';
   }
 }
 
-// ===== Apercu evenements/sorties/expositions sur la homepage (index.html) — GET /api/actualites =====
+// ===== Aperçu événements/sorties/expositions sur la homepage (index.html) — GET /api/actualites =====
 document.addEventListener('DOMContentLoaded', async () => {
   const conteneur = document.getElementById('liste-actualites-accueil');
   if (!conteneur) return;
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const items = (await reponse.json()).filter((item) => ['evenement', 'sorties', 'exposition'].includes(item.categorie));
 
     if (items.length === 0) {
-      conteneur.innerHTML = '<p class="texte-secondaire">Aucun evenement pour le moment.</p>';
+      conteneur.innerHTML = '<p class="texte-secondaire">Aucun événement pour le moment.</p>';
       return;
     }
 
@@ -380,7 +380,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       `;
     }).join('');
   } catch (error) {
-    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les evenements. Le serveur back-end est-il demarre ?</p>';
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les événements. Le serveur back-end est-il démarré ?</p>';
   }
 });
 
@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// ===== Fiche detail d'un evenement/actualite (page evenement-detail.html) — GET /api/actualites/:id =====
+// ===== Fiche détail d'un événement/actualité (page evenement-detail.html) — GET /api/actualites/:id =====
 document.addEventListener('DOMContentLoaded', async () => {
   const conteneur = document.getElementById('fiche-evenement');
   if (!conteneur) return;
@@ -449,12 +449,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       `).join('');
     }
   } catch (error) {
-    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger ce contenu. Le serveur back-end est-il demarre ?</p>';
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger ce contenu. Le serveur back-end est-il démarré ?</p>';
   }
 });
 
-// Renvoie un resume court d'un texte (ex. pour l'aperçu carte d'une association),
-// en coupant proprement sur un mot entier et en ajoutant "..." si le texte est tronque.
+// Renvoie un résumé court d'un texte (ex. pour l'aperçu carte d'une association),
+// en coupant proprement sur un mot entier et en ajoutant "..." si le texte est tronqué.
 function resumer(texte, longueur = 100) {
   if (!texte) return '';
   const uneLigne = texte.split('\n').map((l) => l.trim()).filter(Boolean)[0] || '';
@@ -491,11 +491,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       </a>
     `).join('');
   } catch (error) {
-    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les associations. Le serveur back-end est-il demarre ?</p>';
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger les associations. Le serveur back-end est-il démarré ?</p>';
   }
 });
 
-// ===== Fiche detail d'une association (page association-detail.html) — GET /api/associations/:id =====
+// ===== Fiche détail d'une association (page association-detail.html) — GET /api/associations/:id =====
 document.addEventListener('DOMContentLoaded', async () => {
   const conteneur = document.getElementById('fiche-association');
   if (!conteneur) return;
@@ -535,7 +535,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       ${asso.lien_externe ? `<a href="${asso.lien_externe}" target="_blank" rel="noopener noreferrer" class="btn btn-secondaire" style="margin-top:12px; display:inline-block;">Voir le site ↗</a>` : ''}
     `;
   } catch (error) {
-    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger cette association. Le serveur back-end est-il demarre ?</p>';
+    conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger cette association. Le serveur back-end est-il démarré ?</p>';
   }
 });
 
@@ -565,7 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const telephone = champTelephone.value.trim();
     const message = champMessage.value.trim();
 
-    // Validation cote client, en miroir de la validation cote serveur
+    // Validation côté client, en miroir de la validation côté serveur
     if (!prenom || !nomFamille || !email || !message) {
       erreur.textContent = 'Merci de remplir tous les champs obligatoires.';
       erreur.style.display = 'block';
@@ -577,7 +577,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     if (!champConsentement.checked) {
-      erreur.textContent = 'Merci d\'accepter l\'utilisation de vos donnees pour continuer.';
+      erreur.textContent = 'Merci d\'accepter l\'utilisation de vos données pour continuer.';
       erreur.style.display = 'block';
       return;
     }
@@ -600,12 +600,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      succes.textContent = 'Votre message a bien ete envoye, merci !';
+      succes.textContent = 'Votre message a bien été envoyé, merci !';
       succes.style.display = 'block';
       formContact.reset();
     } catch (error) {
-      // Le plus souvent : le serveur back-end n'est pas demarre
-      erreur.textContent = 'Impossible de contacter le serveur. Reessayez plus tard.';
+      // Le plus souvent : le serveur back-end n'est pas démarré
+      erreur.textContent = 'Impossible de contacter le serveur. Réessayez plus tard.';
       erreur.style.display = 'block';
     } finally {
       boutonEnvoyer.disabled = false;

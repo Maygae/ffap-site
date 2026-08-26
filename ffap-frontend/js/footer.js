@@ -1,5 +1,5 @@
-// Injecte le pied de page dans toutes les pages qui possedent <footer id="site-footer"></footer>
-// Objectif : ne pas dupliquer ce bloc dans chaque fichier HTML -> un seul endroit a modifier.
+// Injecte le pied de page dans toutes les pages qui possèdent <footer id="site-footer"></footer>
+// Objectif : ne pas dupliquer ce bloc dans chaque fichier HTML -> un seul endroit à modifier.
 
 document.addEventListener('DOMContentLoaded', () => {
   const footer = document.getElementById('site-footer');
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="footer-inner">
       <div class="footer-brand">
         <img class="footer-logo-badge" src="assets/images/logo-ffap.png" alt="Logo F.F.A.P." />
-        <p class="footer-desc">La Federation Francaise des Arts Plastiques rassemble artistes et associations d'arts plastiques autour de projets communs : expositions, partage de moyens et representation aupres des institutions.</p>
+        <p class="footer-desc">La Fédération Française des Arts Plastiques rassemble artistes et associations d'arts plastiques autour de projets communs : expositions, partage de moyens et représentation auprès des institutions.</p>
         <div class="footer-social">
           <a href="https://www.instagram.com/ffap_france/" target="_blank" rel="noopener noreferrer" aria-label="Instagram F.F.A.P.">
             <svg viewBox="0 0 50 50" aria-hidden="true"><path d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z"/></svg>
@@ -28,17 +28,17 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="index.html">Accueil</a>
         <a href="artistes.html">Artistes</a>
         <a href="associations.html">Associations</a>
-        <a href="actualites.html">Evenements &amp; Sorties</a>
-        <a href="federation.html">A propos</a>
+        <a href="actualites.html">Événements &amp; Sorties</a>
+        <a href="federation.html">À propos</a>
         <a href="contact.html">Contact</a>
       </div>
 
       <div class="footer-col">
         <h3>Informations</h3>
         <div class="footer-info-row">
-          <a href="index.html#rejoindre-nous">Adherer</a>
+          <a href="index.html#rejoindre-nous">Adhérer</a>
           <span aria-hidden="true">&middot;</span>
-          <a href="mentions-legales.html">Mentions legales</a>
+          <a href="mentions-legales.html">Mentions légales</a>
         </div>
       </div>
     </div>
