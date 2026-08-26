@@ -1,4 +1,6 @@
-// Cree l'actualite "2e Grand Salon des Arts de la FFAP" (categorie evenement).
+// Cree l'actualite "2e Grand Salon des arts de la F.F.A.P." (categorie evenement).
+// NB : le titre a ete harmonise depuis la creation initiale ("2e Grand Salon des Arts de la FFAP") ;
+// voir src/scripts/fix-titre-salon-2027.js pour corriger une actualite deja en base.
 // L'affiche doit se trouver dans le dossier photos-a-importer/ a la racine de ffap-backend.
 // Usage : node src/scripts/create-actualite-salon-2027.js
 
@@ -11,7 +13,7 @@ const ADMIN_EMAIL = 'ffap.83@gmail.com';
 const CHEMIN_IMAGE = path.join(__dirname, '..', '..', 'photos-a-importer', 'actualite-salon-2027.png');
 
 const actualite = {
-  titre: '2e Grand Salon des Arts de la FFAP',
+  titre: '2e Grand Salon des arts de la F.F.A.P.',
   categorie: 'evenement',
   lieu: 'Forum du Casino de Hyeres',
   date_evenement: '2027-03-04',
