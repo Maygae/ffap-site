@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tableau de bord — Back-office F.F.A.P.</title>
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/admin.css" />
+</head>
+<body data-page="dashboard">
+
+<script src="js/admin-auth.js"></script>
+<script>exigerConnexion();</script>
+
+<div class="admin-nav" id="admin-nav"></div>
+
+<main class="admin-main">
+  <div class="admin-page-head">
+    <h1>Tableau de bord</h1>
+  </div>
+
+  <div class="admin-dashboard-grid">
+    <a href="actualites.html" class="admin-dashboard-carte">
+      <h3>Actualités &amp; événements</h3>
+      <p>Créer, modifier ou supprimer les actualités, événements, sorties et expositions. Gérer la mise en avant "À la une".</p>
+    </a>
+    <a href="artistes.html" class="admin-dashboard-carte">
+      <h3>Artistes</h3>
+      <p>Gérer la liste des artistes membres, leur fiche et leurs œuvres.</p>
+    </a>
+    <a href="associations.html" class="admin-dashboard-carte">
+      <h3>Associations</h3>
+      <p>Gérer les associations membres de la fédération.</p>
+    </a>
+  </div>
+</main>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

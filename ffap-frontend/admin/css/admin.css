@@ -1,0 +1,205 @@
+/* ===== Back-office F.F.A.P. =====
+   Reutilise les variables, couleurs, boutons et champs de formulaire de css/style.css
+   (charge avant celui-ci sur chaque page). Ce fichier ne definit que ce qui est propre
+   a l'interface d'administration : navigation, tableaux, mise en page des formulaires. */
+
+body { background: #F7F9FC; min-height: 100vh; }
+
+/* ===== Navigation ===== */
+.admin-nav {
+  background: var(--bleu-marine);
+  padding: 0 24px;
+}
+.admin-nav-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 16px 0;
+  flex-wrap: wrap;
+}
+.admin-logo {
+  color: var(--blanc);
+  font-family: var(--font-titres);
+  font-weight: 900;
+  font-size: 18px;
+  text-decoration: none;
+  margin-right: auto;
+}
+.admin-nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.admin-nav-links a {
+  color: var(--bleu-300);
+  text-decoration: none;
+  font-size: 14px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+.admin-nav-links a:hover { color: var(--blanc); }
+.admin-nav-links a.active { color: var(--blanc); border-bottom-color: var(--terracotta); }
+.admin-nav-actions { display: flex; align-items: center; gap: 16px; }
+.admin-nav-actions a { color: var(--bleu-300); font-size: 13px; text-decoration: none; }
+.admin-nav-actions a:hover { color: var(--blanc); }
+.admin-nav-actions .btn-secondaire {
+  padding: 8px 16px;
+  font-size: 13px;
+  background: transparent;
+  border: 1px solid var(--bleu-300);
+  color: var(--blanc);
+}
+.admin-nav-actions .btn-secondaire:hover { background: rgba(255,255,255,0.08); opacity: 1; }
+
+/* ===== Contenu ===== */
+.admin-main { max-width: 1140px; margin: 0 auto; padding: 40px 24px 80px; }
+.admin-page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.admin-page-head h1 { font-size: 26px; }
+
+/* ===== Tableau de liste ===== */
+.admin-table-wrap {
+  background: var(--blanc);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre);
+  overflow-x: auto;
+}
+.admin-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.admin-table th, .admin-table td {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid #EEF1F6;
+  white-space: nowrap;
+}
+.admin-table th {
+  color: var(--gris-moyen);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.admin-table tr:last-child td { border-bottom: none; }
+.admin-table td.admin-col-titre { white-space: normal; max-width: 320px; }
+.admin-table-actions { display: flex; gap: 8px; }
+.admin-table-actions a, .admin-table-actions button {
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--gris-clair);
+  background: var(--blanc);
+  color: var(--bleu-marine);
+  text-decoration: none;
+  cursor: pointer;
+  font-family: var(--font-texte);
+}
+.admin-table-actions a:hover { border-color: var(--bleu-transition); color: var(--bleu-transition); }
+.admin-table-actions button.danger { color: #A32D2D; }
+.admin-table-actions button.danger:hover { border-color: #A32D2D; }
+
+.admin-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(46, 110, 110, 0.12);
+  color: var(--petrol);
+}
+.admin-badge--off { background: #F0F0F0; color: var(--gris-moyen); }
+
+.admin-etat-vide {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--gris-moyen);
+}
+
+/* ===== Formulaires ===== */
+.admin-form-card {
+  background: var(--blanc);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre);
+  padding: 32px;
+  max-width: 720px;
+}
+.admin-form-card .form-champ textarea { min-height: 140px; resize: vertical; }
+.admin-checkbox-champ {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.admin-checkbox-champ input { width: auto; }
+.admin-checkbox-champ label { margin: 0; font-size: 14px; color: var(--bleu-marine); }
+.admin-form-actions { display: flex; gap: 12px; margin-top: 24px; }
+.admin-image-actuelle {
+  display: block;
+  max-width: 160px;
+  border-radius: var(--rayon);
+  margin-bottom: 12px;
+}
+.admin-champ-aide { font-size: 12px; color: var(--gris-moyen); margin-top: 4px; }
+
+/* ===== Login ===== */
+.admin-login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.admin-login-card {
+  background: var(--blanc);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre);
+  padding: 40px;
+  width: 100%;
+  max-width: 380px;
+}
+.admin-login-card h1 { font-size: 22px; margin-bottom: 4px; }
+.admin-login-card p.texte-secondaire { margin-bottom: 24px; }
+
+/* ===== Dashboard ===== */
+.admin-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.admin-dashboard-carte {
+  background: var(--blanc);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre);
+  padding: 24px;
+  text-decoration: none;
+  display: block;
+}
+.admin-dashboard-carte h3 { margin-bottom: 6px; }
+.admin-dashboard-carte p { color: var(--gris-moyen); font-size: 14px; }
+
+/* ===== Galerie (oeuvres / photos d'evenement) ===== */
+.admin-galerie { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; margin: 16px 0 24px; }
+.admin-galerie-item { position: relative; border-radius: var(--rayon); overflow: hidden; aspect-ratio: 1; background: #F0F0F0; }
+.admin-galerie-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.admin-galerie-item button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(163, 45, 45, 0.9);
+  color: var(--blanc);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard-grid { grid-template-columns: 1fr; }
+  .admin-nav-inner { gap: 16px; }
+  .admin-form-card { padding: 24px 20px; }
+}

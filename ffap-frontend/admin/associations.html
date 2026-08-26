@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Associations — Back-office F.F.A.P.</title>
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/admin.css" />
+</head>
+<body data-page="associations">
+
+<script src="js/admin-auth.js"></script>
+<script>exigerConnexion();</script>
+
+<div class="admin-nav" id="admin-nav"></div>
+
+<main class="admin-main">
+  <div class="admin-page-head">
+    <h1>Associations</h1>
+    <a href="association-form.html" class="btn btn-primaire">+ Nouvelle association</a>
+  </div>
+
+  <div class="admin-table-wrap">
+    <table class="admin-table" id="table-associations">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Site externe</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="corps-table-associations">
+        <tr><td colspan="3">Chargement...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<script src="js/admin.js"></script>
+<script src="js/admin-associations.js"></script>
+</body>
+</html>

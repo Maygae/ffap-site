@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Artiste — Back-office F.F.A.P.</title>
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/admin.css" />
+</head>
+<body data-page="artistes">
+
+<script src="js/admin-auth.js"></script>
+<script>exigerConnexion();</script>
+
+<div class="admin-nav" id="admin-nav"></div>
+
+<main class="admin-main">
+  <div class="admin-page-head">
+    <h1 id="titre-page-form">Nouvel artiste</h1>
+    <a href="artistes.html" class="texte-secondaire">← Retour à la liste</a>
+  </div>
+
+  <div class="admin-form-card">
+    <form id="form-artiste" novalidate>
+      <div class="form-champ">
+        <label for="nom">Nom *</label>
+        <input type="text" id="nom" name="nom" required />
+      </div>
+
+      <div class="form-champ">
+        <label for="discipline">Discipline</label>
+        <input type="text" id="discipline" name="discipline" placeholder="Ex. Peinture, Sculpture..." />
+      </div>
+
+      <div class="form-champ">
+        <label for="bio">Biographie</label>
+        <textarea id="bio" name="bio"></textarea>
+      </div>
+
+      <div class="form-champ">
+        <label for="photo">Photo</label>
+        <img id="photo-actuelle" class="admin-image-actuelle" style="display:none; border-radius:50%; width:120px; height:120px; object-fit:cover;" alt="Photo actuelle" />
+        <input type="file" id="photo" name="photo" accept="image/png, image/jpeg, image/webp" />
+        <p class="admin-champ-aide">JPG, PNG ou WebP, 5 Mo maximum. Laisser vide pour conserver la photo actuelle.</p>
+      </div>
+
+      <p class="form-erreur" id="form-erreur" style="display:none;"></p>
+
+      <div class="admin-form-actions">
+        <button type="submit" class="btn btn-primaire" id="form-submit">Créer</button>
+        <a href="artistes.html" class="btn btn-secondaire">Annuler</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="admin-form-card" id="zone-oeuvres" style="display:none; margin-top:24px;">
+    <h3 style="margin-bottom:16px;">Œuvres</h3>
+    <div class="admin-galerie" id="galerie-oeuvres-admin"></div>
+    <form id="form-ajout-oeuvre" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+      <input type="text" id="nouvelle-oeuvre-titre" placeholder="Titre de l'œuvre (facultatif)" style="flex:1; min-width:180px; padding:10px 12px; border:1px solid var(--gris-clair); border-radius:var(--rayon); font-family:var(--font-texte); font-size:15px;" />
+      <input type="file" id="nouvelle-oeuvre-image" accept="image/png, image/jpeg, image/webp" required />
+      <button type="submit" class="btn btn-secondaire">Ajouter</button>
+    </form>
+  </div>
+</main>
+
+<script src="js/admin.js"></script>
+<script src="js/admin-artistes.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Actualité — Back-office F.F.A.P.</title>
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/admin.css" />
+</head>
+<body data-page="actualites">
+
+<script src="js/admin-auth.js"></script>
+<script>exigerConnexion();</script>
+
+<div class="admin-nav" id="admin-nav"></div>
+
+<main class="admin-main">
+  <div class="admin-page-head">
+    <h1 id="titre-page-form">Nouvelle actualité</h1>
+    <a href="actualites.html" class="texte-secondaire">← Retour à la liste</a>
+  </div>
+
+  <div class="admin-form-card">
+    <form id="form-actualite" novalidate>
+      <div class="form-champ">
+        <label for="titre">Titre *</label>
+        <input type="text" id="titre" name="titre" required />
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-champ">
+          <label for="categorie">Catégorie *</label>
+          <select id="categorie" name="categorie" class="select-filtre" style="width:100%;" required>
+            <option value="evenement">Événement</option>
+            <option value="sorties">Sorties</option>
+            <option value="exposition">Exposition</option>
+          </select>
+        </div>
+        <div class="form-champ">
+          <label for="date_evenement">Date</label>
+          <input type="date" id="date_evenement" name="date_evenement" />
+        </div>
+      </div>
+
+      <div class="form-champ">
+        <label for="lieu">Lieu</label>
+        <input type="text" id="lieu" name="lieu" placeholder="Ex. Forum du Casino de Hyères" />
+      </div>
+
+      <div class="form-champ">
+        <label for="contenu">Contenu</label>
+        <textarea id="contenu" name="contenu" placeholder="Un paragraphe par ligne vide"></textarea>
+      </div>
+
+      <div class="form-champ">
+        <label for="image">Image de couverture</label>
+        <img id="image-actuelle" class="admin-image-actuelle" style="display:none;" alt="Image actuelle" />
+        <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/webp" />
+        <p class="admin-champ-aide">JPG, PNG ou WebP, 5 Mo maximum. Laisser vide pour conserver l'image actuelle.</p>
+      </div>
+
+      <div class="admin-checkbox-champ">
+        <input type="checkbox" id="a_la_une" name="a_la_une" />
+        <label for="a_la_une">Mettre à la une (affiché dans un bloc dédié en tête de la page Événements)</label>
+      </div>
+
+      <p class="form-erreur" id="form-erreur" style="display:none;"></p>
+
+      <div class="admin-form-actions">
+        <button type="submit" class="btn btn-primaire" id="form-submit">Créer</button>
+        <a href="actualites.html" class="btn btn-secondaire">Annuler</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="admin-form-card" id="zone-galerie" style="display:none; margin-top:24px;">
+    <h3 style="margin-bottom:16px;">Galerie photos</h3>
+    <div class="admin-galerie" id="galerie-photos"></div>
+    <form id="form-ajout-photo" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+      <input type="file" id="nouvelle-photo" accept="image/png, image/jpeg, image/webp" required />
+      <button type="submit" class="btn btn-secondaire">Ajouter une photo</button>
+    </form>
+  </div>
+</main>
+
+<script src="js/admin.js"></script>
+<script src="js/admin-actualites.js"></script>
+</body>
+</html>

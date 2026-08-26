@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Association — Back-office F.F.A.P.</title>
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/admin.css" />
+</head>
+<body data-page="associations">
+
+<script src="js/admin-auth.js"></script>
+<script>exigerConnexion();</script>
+
+<div class="admin-nav" id="admin-nav"></div>
+
+<main class="admin-main">
+  <div class="admin-page-head">
+    <h1 id="titre-page-form">Nouvelle association</h1>
+    <a href="associations.html" class="texte-secondaire">← Retour à la liste</a>
+  </div>
+
+  <div class="admin-form-card">
+    <form id="form-association" novalidate>
+      <div class="form-champ">
+        <label for="nom">Nom *</label>
+        <input type="text" id="nom" name="nom" required />
+      </div>
+
+      <div class="form-champ">
+        <label for="description">Description</label>
+        <textarea id="description" name="description"></textarea>
+      </div>
+
+      <div class="form-champ">
+        <label for="lien_externe">Site web (optionnel)</label>
+        <input type="url" id="lien_externe" name="lien_externe" placeholder="https://..." />
+      </div>
+
+      <div class="form-champ">
+        <label for="logo">Logo</label>
+        <img id="logo-actuel" class="admin-image-actuelle" style="display:none; background:#fff; padding:8px;" alt="Logo actuel" />
+        <input type="file" id="logo" name="logo" accept="image/png, image/jpeg, image/webp" />
+        <p class="admin-champ-aide">JPG, PNG ou WebP, 5 Mo maximum. Laisser vide pour conserver le logo actuel.</p>
+      </div>
+
+      <p class="form-erreur" id="form-erreur" style="display:none;"></p>
+
+      <div class="admin-form-actions">
+        <button type="submit" class="btn btn-primaire" id="form-submit">Créer</button>
+        <a href="associations.html" class="btn btn-secondaire">Annuler</a>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script src="js/admin.js"></script>
+<script src="js/admin-associations.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Actualités &amp; événements — Back-office F.F.A.P.</title>
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/admin.css" />
+</head>
+<body data-page="actualites">
+
+<script src="js/admin-auth.js"></script>
+<script>exigerConnexion();</script>
+
+<div class="admin-nav" id="admin-nav"></div>
+
+<main class="admin-main">
+  <div class="admin-page-head">
+    <h1>Actualités &amp; événements</h1>
+    <a href="actualite-form.html" class="btn btn-primaire">+ Nouvelle actualité</a>
+  </div>
+
+  <div class="admin-table-wrap">
+    <table class="admin-table" id="table-actualites">
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Catégorie</th>
+          <th>Date</th>
+          <th>À la une</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="corps-table-actualites">
+        <tr><td colspan="5">Chargement...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<script src="js/admin.js"></script>
+<script src="js/admin-actualites.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Connexion — Back-office F.F.A.P.</title>
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+<div class="admin-login-wrap">
+  <div class="admin-login-card">
+    <h1>Back-office F.F.A.P.</h1>
+    <p class="texte-secondaire">Connectez-vous pour gérer le contenu du site.</p>
+
+    <form id="form-login" novalidate>
+      <div class="form-champ">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="ffap.83@gmail.com" required autocomplete="username" />
+      </div>
+      <div class="form-champ">
+        <label for="mot-de-passe">Mot de passe</label>
+        <input type="password" id="mot-de-passe" name="mot_de_passe" placeholder="Mot de passe" required autocomplete="current-password" />
+      </div>
+
+      <p class="form-erreur" id="login-erreur" style="display:none;"></p>
+
+      <button type="submit" class="btn btn-primaire" id="login-submit" style="width:100%;">Se connecter</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/admin-auth.js"></script>
+<script src="js/admin.js"></script>
+<script>
+  const formLogin = document.getElementById('form-login');
+  const erreur = document.getElementById('login-erreur');
+  const bouton = document.getElementById('login-submit');
+
+  // Si deja connecte, pas besoin de repasser par le login
+  if (getToken()) {
+    window.location.href = 'index.html';
+  }
+
+  formLogin.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    erreur.style.display = 'none';
+
+    const email = document.getElementById('email').value.trim();
+    const mot_de_passe = document.getElementById('mot-de-passe').value;
+
+    bouton.disabled = true;
+    bouton.textContent = 'Connexion...';
+
+    try {
+      const reponse = await fetch(`${ADMIN_API_BASE_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, mot_de_passe }),
+      });
+      const donnees = await reponse.json();
+
+      if (!reponse.ok) {
+        erreur.textContent = donnees.error || 'Connexion impossible.';
+        erreur.style.display = 'block';
+        return;
+      }
+
+      setToken(donnees.token);
+      window.location.href = 'index.html';
+    } catch (error) {
+      erreur.textContent = 'Impossible de contacter le serveur. Le back-end est-il démarré ?';
+      erreur.style.display = 'block';
+    } finally {
+      bouton.disabled = false;
+      bouton.textContent = 'Se connecter';
+    }
+  });
+</script>
+</body>
+</html>
