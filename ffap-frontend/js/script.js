@@ -107,7 +107,7 @@ function construireCartesArtistes(artistes) {
           : initiales(artiste.nom)}
       </div>
       <div class="card-body">
-        ${artiste.discipline ? `<span class="card-tag card-tag--artiste">${artiste.discipline}</span>` : ''}
+        ${artiste.discipline ? `<span class="card-tag card-tag--artiste">${artiste.discipline.trim()}</span>` : ''}
         <h3>${artiste.nom}</h3>
       </div>
     </a>
@@ -136,7 +136,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    const disciplines = [...new Set(artistes.map((a) => a.discipline).filter(Boolean))].sort();
+    // On nettoie (espaces) et on deduplique sans tenir compte de la casse, pour eviter
+    // que "Peinture" et "peinture" (ou une saisie avec espace en trop) comptent double.
+    const disciplinesVues = new Map();
+    artistes.forEach((a) => {
+      const valeur = (a.discipline || '').trim();
+      if (valeur && !disciplinesVues.has(valeur.toLowerCase())) {
+        disciplinesVues.set(valeur.toLowerCase(), valeur);
+      }
+    });
+    const disciplines = [...disciplinesVues.values()].sort();
     const filtreActive = artistes.length >= SEUIL_ARTISTES_POUR_FILTRE && disciplines.length >= SEUIL_DISCIPLINES_POUR_FILTRE;
 
     // Repère discret au-dessus de la grille : nombre d'artistes + disciplines,
@@ -163,7 +172,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       document.getElementById('select-discipline').addEventListener('change', (e) => {
         const choix = e.target.value;
-        const filtres = choix === 'tout' ? artistes : artistes.filter((a) => a.discipline === choix);
+        const filtres = choix === 'tout'
+          ? artistes
+          : artistes.filter((a) => (a.discipline || '').trim().toLowerCase() === choix.toLowerCase());
         conteneur.innerHTML = filtres.length > 0
           ? construireCartesArtistes(filtres)
           : '<p class="texte-secondaire">Aucun artiste dans cette discipline pour le moment.</p>';
@@ -197,7 +208,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           ${initiales(artiste.nom)}
         </div>
         <div class="card-body">
-          ${artiste.discipline ? `<span class="card-tag card-tag--artiste">${artiste.discipline}</span>` : ''}
+          ${artiste.discipline ? `<span class="card-tag card-tag--artiste">${artiste.discipline.trim()}</span>` : ''}
           <h3>${artiste.nom}</h3>
         </div>
       </div>
