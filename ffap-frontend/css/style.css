@@ -695,6 +695,8 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   .coordonnees { grid-template-columns: 1fr; padding: 32px 24px; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
+  section { padding: 40px 0; }
+  .section-compacte { padding: 48px 0; }
 }
 
 @media (max-width: 480px) {
