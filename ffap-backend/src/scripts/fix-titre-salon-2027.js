@@ -50,6 +50,7 @@ async function main() {
   form.append('lieu', item.lieu || '');
   form.append('date_evenement', item.date_evenement ? item.date_evenement.slice(0, 10) : '');
   form.append('contenu', item.contenu || '');
+  form.append('a_la_une', item.a_la_une ? 'true' : 'false');
 
   const res = await fetch(`${API}/api/actualites/${item.id}`, {
     method: 'PUT',

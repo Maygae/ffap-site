@@ -34,6 +34,7 @@ CREATE TABLE actualite (
   categorie ENUM('evenement', 'sorties', 'exposition') NOT NULL,
   date_evenement DATE NULL,
   lieu VARCHAR(150),
+  a_la_une BOOLEAN NOT NULL DEFAULT FALSE,
   published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

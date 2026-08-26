@@ -324,6 +324,11 @@ async function chargerActualites(categorie) {
     const aujourdhui = new Date();
     aujourdhui.setHours(0, 0, 0, 0);
 
+    // Contenus mis en avant depuis le back-office (case "A la une") : affiches dans un
+    // bloc dedie en tete de page, en plus de rester visibles dans leur categorie/date
+    // habituelle ci-dessous (pas de retrait de la liste generale).
+    const aLaUne = actualites.filter((item) => Boolean(item.a_la_une));
+
     const aVenir = actualites
       .filter((item) => !item.date_evenement || new Date(item.date_evenement) >= aujourdhui)
       .sort((a, b) => new Date(a.date_evenement || 0) - new Date(b.date_evenement || 0));
@@ -333,6 +338,15 @@ async function chargerActualites(categorie) {
       .sort((a, b) => new Date(b.date_evenement) - new Date(a.date_evenement));
 
     let html = '';
+
+    if (aLaUne.length > 0) {
+      html += `
+        <div class="section-head" style="text-align:left; margin-bottom:20px;">
+          <h2>À la une</h2>
+        </div>
+        <div class="grid grid-3" style="margin-bottom:48px;">${construireCartesActualites(aLaUne)}</div>
+      `;
+    }
 
     html += `
       <div class="section-head" style="text-align:left; margin-bottom:20px;">

@@ -45,6 +45,7 @@ CREATE TABLE actualite (
   categorie ENUM('evenement', 'sorties', 'exposition') NOT NULL,
   date_evenement DATE NULL,                -- utile pour "evenement", NULL sinon
   lieu VARCHAR(150),
+  a_la_une BOOLEAN NOT NULL DEFAULT FALSE, -- affiche le contenu dans le bloc "A la une" de la page evenements
   published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
