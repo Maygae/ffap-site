@@ -336,7 +336,7 @@ async function chargerActualites(categorie) {
 
     html += `
       <div class="section-head" style="text-align:left; margin-bottom:20px;">
-        <h2>À venir</h2>
+        <h2>Prochains événements</h2>
       </div>
     `;
     html += aVenir.length > 0
