@@ -1,7 +1,11 @@
 // Barre de navigation du back-office, injectee dans <div id="admin-nav"></div> sur
 // chaque page (meme principe que js/footer.js sur le site public).
 
-const ADMIN_API_BASE_URL = 'http://localhost:3000';
+// En local (Live Server, XAMPP...) on parle au backend local ; en ligne (Netlify),
+// on parle au backend deploye sur Railway.
+const ADMIN_API_BASE_URL = ['localhost', '127.0.0.1'].includes(window.location.hostname)
+  ? 'http://localhost:3000'
+  : 'https://ffap-site-production.up.railway.app';
 
 document.addEventListener('DOMContentLoaded', () => {
   const zoneNav = document.getElementById('admin-nav');

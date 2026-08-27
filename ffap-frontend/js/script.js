@@ -82,7 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-const API_BASE_URL = 'http://localhost:3000';
+// En local (Live Server, XAMPP...) on parle au backend local ; en ligne (Netlify),
+// on parle au backend deploye sur Railway.
+const API_BASE_URL = ['localhost', '127.0.0.1'].includes(window.location.hostname)
+  ? 'http://localhost:3000'
+  : 'https://ffap-site-production.up.railway.app';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Renvoie les initiales d'un nom (ex. "Martine de Santis" -> "MD"),
