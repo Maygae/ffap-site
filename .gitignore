@@ -8,8 +8,9 @@ node_modules/
 .DS_Store
 
 # Fichiers uploades par les utilisateurs (photos artistes, images actualites...)
-# Ne sont pas versionnes : ils sont propres a chaque environnement (dev/prod)
-ffap-backend/uploads/
+# Versionnes pour que Railway (production) dispose des memes images qu'en local,
+# car Railway ne conserve pas de disque persistant entre deploiements sans volume dedie.
+# ffap-backend/uploads/
 
 # Dossier de travail temporaire utilise pour importer des photos via les scripts
 ffap-backend/photos-a-importer/
