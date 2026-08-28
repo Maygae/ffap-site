@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
 
     <div class="footer-bottom">
-      <p class="footer-copyright">&copy; 2026 F.F.A.P. réaliser par Maygae</p>
+      <p class="footer-copyright">&copy; 2026 F.F.A.P. réalisé par Maygae</p>
     </div>
   `;
 });
