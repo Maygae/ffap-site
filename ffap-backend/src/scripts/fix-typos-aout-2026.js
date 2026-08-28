@@ -72,11 +72,15 @@ async function corrigerActualite(token, ancienTitre, corrections) {
 async function corrigerArtiste(token, nom, corrigerBio) {
   const listeRes = await fetch(`${API}/api/artistes`);
   const liste = await listeRes.json();
-  const item = liste.find((a) => a.nom === nom);
-  if (!item) {
+  const resume = liste.find((a) => a.nom === nom);
+  if (!resume) {
     console.error(`Artiste introuvable : ${nom}`);
     return;
   }
+
+  // La liste ne contient pas la bio complete, il faut recuperer la fiche detaillee
+  const detailRes = await fetch(`${API}/api/artistes/${resume.id}`);
+  const item = await detailRes.json();
 
   const nouvelleBio = corrigerBio(item.bio);
 
