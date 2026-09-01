@@ -1,6 +1,6 @@
 # Site F.F.A.P. — Fédération Française des Arts Plastiques
 
-Site vitrine et back-office de gestion pour la F.F.A.P. Projet réalisé par Maygae dans le cadre de sa certification DWWM (Développeur Web et Web Mobile).
+Site vitrine et back-office de gestion pour la F.F.A.P. Projet réalisé par Maygae.
 
 ## Aperçu
 
