@@ -389,11 +389,6 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   object-fit: contain;
   display: block;
   transform: scale(1.2);
-  animation: tourner-lentement 6s linear infinite;
-  animation-play-state: paused;
-}
-.visuel-cadre:hover img {
-  animation-play-state: running;
 }
 
 @keyframes tourner-lentement {
