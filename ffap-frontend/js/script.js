@@ -241,6 +241,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const artiste = await reponse.json();
 
     document.title = `${artiste.nom} — F.F.A.P.`;
+    majMetaDescription({
+      description: resumer(artiste.bio, 155) || `Découvrez ${artiste.nom}, artiste membre de la F.F.A.P.`,
+      ogTitle: `${artiste.nom} — F.F.A.P.`,
+      ogDescription: resumer(artiste.bio, 155) || `Découvrez ${artiste.nom}, artiste membre de la F.F.A.P.`,
+    });
 
     conteneur.innerHTML = `
       <div style="display:flex; align-items:center; gap:20px; margin:24px 0;">
@@ -447,6 +452,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const item = await reponse.json();
 
     document.title = `${item.titre} — F.F.A.P.`;
+    majMetaDescription({
+      description: resumer(item.contenu, 155) || `Découvrez « ${item.titre} », un événement de la F.F.A.P.`,
+      ogTitle: `${item.titre} — F.F.A.P.`,
+      ogDescription: resumer(item.contenu, 155) || `Découvrez « ${item.titre} », un événement de la F.F.A.P.`,
+      ogImage: item.image ? `${API_BASE_URL}${item.image}` : undefined,
+    });
 
     const date = item.date_evenement
       ? new Date(item.date_evenement).toLocaleDateString('fr-FR', { timeZone: 'UTC' })
@@ -481,6 +492,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     conteneur.innerHTML = '<p class="texte-secondaire">Impossible de charger ce contenu. Le serveur back-end est-il démarré ?</p>';
   }
 });
+
+// Met a jour les balises meta description / Open Graph d'une page de fiche detail
+// (artiste, association, evenement), pour un referencement et un partage corrects.
+function majMetaDescription({ description, ogTitle, ogDescription, ogImage }) {
+  const metaDescription = document.getElementById('meta-description');
+  if (metaDescription && description) metaDescription.setAttribute('content', description);
+
+  const metaOgTitle = document.getElementById('meta-og-title');
+  if (metaOgTitle && ogTitle) metaOgTitle.setAttribute('content', ogTitle);
+
+  const metaOgDescription = document.getElementById('meta-og-description');
+  if (metaOgDescription && ogDescription) metaOgDescription.setAttribute('content', ogDescription);
+
+  const metaOgImage = document.getElementById('meta-og-image');
+  if (metaOgImage && ogImage) metaOgImage.setAttribute('content', ogImage);
+}
 
 // Renvoie un résumé court d'un texte (ex. pour l'aperçu carte d'une association),
 // en coupant proprement sur un mot entier et en ajoutant "..." si le texte est tronqué.
@@ -543,6 +570,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const asso = await reponse.json();
 
     document.title = `${asso.nom} — F.F.A.P.`;
+    majMetaDescription({
+      description: resumer(asso.description, 155) || `Découvrez ${asso.nom}, association membre de la F.F.A.P.`,
+      ogTitle: `${asso.nom} — F.F.A.P.`,
+      ogDescription: resumer(asso.description, 155) || `Découvrez ${asso.nom}, association membre de la F.F.A.P.`,
+    });
 
     const paragraphes = (asso.description || 'Aucune description pour le moment.')
       .split('\n')
