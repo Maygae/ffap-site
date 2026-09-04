@@ -389,6 +389,12 @@ a.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   object-fit: contain;
   display: block;
   transform: scale(1.2);
+  animation: tourner-lentement 18s linear infinite;
+}
+
+@keyframes tourner-lentement {
+  from { transform: scale(1.2) rotate(0deg); }
+  to { transform: scale(1.2) rotate(360deg); }
 }
 
 .value-list { list-style: none; margin-top: 16px; }
