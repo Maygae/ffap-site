@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="actualites.html"${lienActif('actualites')}>Actualités &amp; événements</a>
         <a href="artistes.html"${lienActif('artistes')}>Artistes</a>
         <a href="associations.html"${lienActif('associations')}>Associations</a>
+        <a href="messages.html"${lienActif('messages')}>Messages</a>
       </nav>
       <div class="admin-nav-actions">
         <a href="../index.html" target="_blank" rel="noopener noreferrer">Voir le site ↗</a>

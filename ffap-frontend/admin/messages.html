@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Messages — Back-office F.F.A.P.</title>
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/admin.css" />
+</head>
+<body data-page="messages">
+
+<script src="js/admin-auth.js"></script>
+<script>exigerConnexion();</script>
+
+<div class="admin-nav" id="admin-nav"></div>
+
+<main class="admin-main">
+  <div class="admin-page-head">
+    <h1>Messages de contact</h1>
+  </div>
+
+  <div class="admin-table-wrap">
+    <table class="admin-table" id="table-messages">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Message</th>
+          <th>Reçu le</th>
+          <th>Statut</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="corps-table-messages">
+        <tr><td colspan="7">Chargement...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<script src="js/admin.js"></script>
+<script src="js/admin-messages.js"></script>
+</body>
+</html>
