@@ -1,27 +1,10 @@
 // Gere la reception des fichiers images envoyes par l'admin (photo artiste, image oeuvre...)
-// Les fichiers sont stockes sur le disque dans /uploads, seul le chemin est stocke en base.
+// Les images sont stockees dans la base MySQL (table "fichier") et non plus sur le disque :
+// l'hebergeur gratuit (Render) efface son disque a chaque redemarrage.
+// Apres l'envoi, req.file.url contient l'adresse publique de l'image, ex : /api/fichiers/12
 
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-
-const UPLOAD_DIR = path.join(__dirname, '../../uploads');
-
-// On cree le dossier au demarrage s'il n'existe pas encore
-if (!fs.existsSync(UPLOAD_DIR)) {
-  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, UPLOAD_DIR);
-  },
-  filename: (req, file, cb) => {
-    // ex : 1723999999999-photo.jpg (timestamp pour eviter les collisions de noms)
-    const extension = path.extname(file.originalname);
-    cb(null, `${Date.now()}${extension}`);
-  },
-});
+const fichierModel = require('../models/fichier.model');
 
 const TYPES_AUTORISES = ['image/jpeg', 'image/png', 'image/webp'];
 
@@ -33,10 +16,29 @@ function fileFilter(req, file, cb) {
   }
 }
 
-const upload = multer({
-  storage,
+const multerUpload = multer({
+  storage: multer.memoryStorage(), // le fichier reste en memoire le temps de l'enregistrer en base
   fileFilter,
   limits: { fileSize: 5 * 1024 * 1024 }, // 5 Mo max
 });
 
-module.exports = upload;
+// Enregistre le fichier recu dans la base puis expose son adresse dans req.file.url
+async function enregistrerEnBase(req, res, next) {
+  if (!req.file) return next();
+  try {
+    const id = await fichierModel.create({
+      nomOriginal: req.file.originalname,
+      typeMime: req.file.mimetype,
+      donnees: req.file.buffer,
+    });
+    req.file.url = `/api/fichiers/${id}`;
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Meme utilisation qu'avant dans les routes : upload.single('photo')
+module.exports = {
+  single: (champ) => [multerUpload.single(champ), enregistrerEnBase],
+};

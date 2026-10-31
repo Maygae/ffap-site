@@ -10,6 +10,8 @@ const evenementRoutes = require('./src/routes/evenement.routes');
 const associationRoutes = require('./src/routes/association.routes');
 const messageRoutes = require('./src/routes/message.routes');
 const imageRoutes = require('./src/routes/image.routes');
+const fichierRoutes = require('./src/routes/fichier.routes');
+const fichierModel = require('./src/models/fichier.model');
 
 const app = express();
 
@@ -27,6 +29,7 @@ app.use('/api/actualites', evenementRoutes);
 app.use('/api/associations', associationRoutes);
 app.use('/api/contact', messageRoutes);
 app.use('/api/images', imageRoutes);
+app.use('/api/fichiers', fichierRoutes); // images stockees en base
 
 // Route de test : verifie que le serveur tourne
 app.get('/', (req, res) => {
@@ -72,4 +75,8 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Serveur FFAP demarre sur http://localhost:${PORT}`);
+  // Cree la table des images si besoin (sans bloquer le demarrage si la base est indisponible)
+  fichierModel.ensureTable().catch((error) => {
+    console.error('Impossible de verifier la table fichier :', error.message);
+  });
 });

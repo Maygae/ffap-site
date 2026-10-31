@@ -36,7 +36,7 @@ async function create(req, res) {
   }
 
   try {
-    const photo = req.file ? `/uploads/${req.file.filename}` : null;
+    const photo = req.file ? req.file.url : null;
     const id = await artisteModel.create({ nom, discipline, bio, photo });
     res.status(201).json({ id, nom, discipline, bio, photo });
   } catch (error) {
@@ -59,7 +59,7 @@ async function update(req, res) {
       return res.status(404).json({ error: 'Artiste introuvable' });
     }
 
-    const photo = req.file ? `/uploads/${req.file.filename}` : null;
+    const photo = req.file ? req.file.url : null;
     await artisteModel.update(req.params.id, { nom, discipline, bio, photo });
     res.json({ message: 'Artiste mis a jour' });
   } catch (error) {
@@ -97,7 +97,7 @@ async function addOeuvre(req, res) {
       return res.status(404).json({ error: 'Artiste introuvable' });
     }
 
-    const image = `/uploads/${req.file.filename}`;
+    const image = req.file.url;
     const id = await oeuvreModel.create({
       artisteId: req.params.id,
       titre,

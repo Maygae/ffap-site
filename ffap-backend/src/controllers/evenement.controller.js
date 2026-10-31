@@ -55,7 +55,7 @@ async function addImage(req, res) {
       return res.status(404).json({ error: 'Evenement introuvable' });
     }
 
-    const image = `/uploads/${req.file.filename}`;
+    const image = req.file.url;
     const id = await actualiteImageModel.create({ actualiteId: req.params.id, image });
     res.status(201).json({ id, image });
   } catch (error) {
@@ -90,7 +90,7 @@ async function create(req, res) {
   }
 
   try {
-    const image = req.file ? `/uploads/${req.file.filename}` : null;
+    const image = req.file ? req.file.url : null;
     const id = await evenementModel.create({ titre, contenu, image, categorie, date_evenement, lieu, a_la_une });
     res.status(201).json({ id, titre, contenu, image, categorie, date_evenement, lieu, a_la_une });
   } catch (error) {
@@ -119,7 +119,7 @@ async function update(req, res) {
       return res.status(404).json({ error: 'Evenement introuvable' });
     }
 
-    const image = req.file ? `/uploads/${req.file.filename}` : null;
+    const image = req.file ? req.file.url : null;
     await evenementModel.update(req.params.id, { titre, contenu, image, categorie, date_evenement, lieu, a_la_une });
     res.json({ message: 'Evenement mis a jour' });
   } catch (error) {

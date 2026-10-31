@@ -77,3 +77,13 @@ CREATE TABLE message_contact (
   statut ENUM('nouveau', 'traite') DEFAULT 'nouveau',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Images envoyees depuis le back-office, stockees directement en base
+-- (l'hebergeur gratuit Render efface son disque a chaque redemarrage)
+CREATE TABLE fichier (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nom_original VARCHAR(255),
+  type_mime VARCHAR(50) NOT NULL,
+  donnees MEDIUMBLOB NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

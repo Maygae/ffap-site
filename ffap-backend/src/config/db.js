@@ -19,6 +19,12 @@ const pool = mysql.createPool({
   // (ex. 2027-03-04 devient 2027-03-03 une fois converti en UTC pour le JSON).
   // "dateStrings: true" garde les dates telles quelles, en chaine "AAAA-MM-JJ".
   dateStrings: true,
+  // Connexion chiffree (SSL) : obligatoire chez Aiven.
+  // DB_SSL_CA contient le certificat CA d'Aiven (copie depuis la console Aiven).
+  // En local (XAMPP), on laisse DB_SSL_CA vide : pas de SSL.
+  ssl: process.env.DB_SSL_CA
+    ? { ca: process.env.DB_SSL_CA.replace(/\\n/g, '\n'), rejectUnauthorized: true }
+    : undefined,
 });
 
 module.exports = pool;

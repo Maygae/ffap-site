@@ -34,7 +34,7 @@ async function create(req, res) {
   }
 
   try {
-    const logo = req.file ? `/uploads/${req.file.filename}` : null;
+    const logo = req.file ? req.file.url : null;
     const id = await associationModel.create({ nom, logo, description, lien_externe });
     res.status(201).json({ id, nom, logo, description, lien_externe });
   } catch (error) {
@@ -57,7 +57,7 @@ async function update(req, res) {
       return res.status(404).json({ error: 'Association introuvable' });
     }
 
-    const logo = req.file ? `/uploads/${req.file.filename}` : null;
+    const logo = req.file ? req.file.url : null;
     await associationModel.update(req.params.id, { nom, logo, description, lien_externe });
     res.json({ message: 'Association mise a jour' });
   } catch (error) {
