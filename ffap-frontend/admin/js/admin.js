@@ -5,7 +5,7 @@
 // on parle au backend deploye sur Render.
 const ADMIN_API_BASE_URL = ['localhost', '127.0.0.1'].includes(window.location.hostname)
   ? 'http://localhost:3000'
-  : 'https://ffap-site.onrender.com';
+  : 'https://ffap-api.onrender.com';
 
 document.addEventListener('DOMContentLoaded', () => {
   const zoneNav = document.getElementById('admin-nav');
